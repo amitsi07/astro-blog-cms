@@ -1,0 +1,92 @@
+# Sveltia CMS Configuration for Astro Blog Platform
+# Documentation: https://github.com/sveltia/sveltia-cms
+# Deployment: GitHub Repo + Cloudflare Pages
+
+backend:
+  name: github
+  repo: your-username/astro-blog-cms # Replace with your GitHub "username/repo-name"
+  branch: main # Default branch to commit content to
+
+# Media asset repository
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Site preview URLs
+site_url: "https://your-site.pages.dev"
+display_url: "https://your-site.pages.dev"
+logo_url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=120&h=120&q=80"
+
+# Publish workflow settings
+publish_mode: simple
+show_preview_links: true
+
+collections:
+  - name: "posts"
+    label: "Articles & Blog Posts"
+    label_singular: "Article"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+      - { label: "Clean URL Slug", name: "slug", widget: "string" }
+      - { label: "Published At", name: "publishedAt", widget: "datetime" }
+      - { label: "Status", name: "status", widget: "select", options: ["published", "draft", "scheduled"], default: "published" }
+      - { label: "Category", name: "category", widget: "select", options: ["Technology & AI", "Cloudflare & Edge", "Web Architecture", "Creator Economy"] }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Featured Hero Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Image Alt Text", name: "featuredImageAlt", widget: "string", required: false }
+      - { label: "Image Caption", name: "featuredImageCaption", widget: "string", required: false }
+      - { label: "Photo Credit / Source", name: "featuredImageCredit", widget: "string", required: false }
+      - { label: "Show in Article Top", name: "showFeaturedImageInPost", widget: "boolean", default: true }
+      - { label: "Pin as Featured Hero", name: "isFeatured", widget: "boolean", default: false }
+      - { label: "Trending Badge", name: "isTrending", widget: "boolean", default: false }
+      - { label: "Allow Reader Comments", name: "allowComments", widget: "boolean", default: true }
+      - { label: "Excerpt / Summary", name: "excerpt", widget: "text" }
+      - { label: "Article Body (Markdown)", name: "body", widget: "markdown" }
+
+  - name: "categories"
+    label: "Categories"
+    folder: "src/content/categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Brand Color (Hex)", name: "color", widget: "color" }
+
+  - name: "pages"
+    label: "Static Pages"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Published", name: "isPublished", widget: "boolean", default: true }
+      - { label: "Page Content", name: "body", widget: "markdown" }
+
+  - name: "settings"
+    label: "Homepage & Site Theme"
+    files:
+      - label: "Homepage & Theme Customizer"
+        name: "homepage_settings"
+        file: "src/data/settings.json"
+        fields:
+          - { label: "Site Name", name: "siteName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Site Description", name: "description", widget: "text" }
+          - { label: "Theme Mode", name: "themeMode", widget: "select", options: ["amoled", "obsidian", "midnight"] }
+          - { label: "Accent Color", name: "accentColor", widget: "color" }
+          - { label: "Heading Font", name: "fontHeading", widget: "select", options: ["Syne", "Outfit", "Inter", "Bricolage Grotesque", "Space Grotesque", "Plus Jakarta Sans"] }
+          - { label: "Body Font", name: "fontBody", widget: "select", options: ["Plus Jakarta Sans", "Inter", "Outfit", "JetBrains Mono"] }
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subheadline", name: "heroSubheadline", widget: "text" }
+          - { label: "Hero Primary Button Text", name: "heroCtaText", widget: "string" }
+          - { label: "Hero Primary Button Link", name: "heroCtaUrl", widget: "string" }
+          - { label: "Hero Image", name: "heroImageUrl", widget: "image" }
+          - { label: "Footer Bio", name: "footerBio", widget: "text" }
+          - { label: "Footer Copyright", name: "footerCopyright", widget: "string" }

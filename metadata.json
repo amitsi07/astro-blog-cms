@@ -1,0 +1,6 @@
+{
+  "name": "Astro Blog CMS",
+  "description": "Production-grade Astro blogging platform and full-featured CMS with rich content blocks, SEO studio, Cloudflare D1 architecture, and role-based publishing workflow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
