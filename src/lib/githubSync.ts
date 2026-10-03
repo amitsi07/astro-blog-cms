@@ -116,14 +116,14 @@ export function generateAstroFilesBundle(
     }, null, 2)
   });
 
-  // 2. .node-version, .nvmrc & .npmrc to force Node 20+ and smooth dependency resolution
+  // 2. .node-version, .nvmrc & .npmrc to force Node 22+ (required by Astro >=5.x/7.x)
   files.push({
     path: '.node-version',
-    content: '20\n'
+    content: '22\n'
   });
   files.push({
     path: '.nvmrc',
-    content: '20\n'
+    content: '22\n'
   });
   files.push({
     path: '.npmrc',
