@@ -1,0 +1,566 @@
+{
+  "users": [
+    {
+      "id": "usr-admin",
+      "username": "admin",
+      "name": "Elena Rostova",
+      "email": "admin@promptplum.com",
+      "role": "administrator",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "bio": "Senior Astro Developer, Prompt Engineer & Creative Director at PromptPlum AI.",
+      "createdAt": "2026-09-01"
+    },
+    {
+      "id": "usr-editor",
+      "username": "kenji",
+      "name": "Kenji Takahashi",
+      "email": "kenji@promptplum.com",
+      "role": "editor",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      "bio": "Cinematographer & Cyberpunk lighting specialist.",
+      "createdAt": "2026-09-10"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post-1",
+      "title": "Editorial 85mm Golden Hour Portrait with Natural Freckles",
+      "slug": "editorial-85mm-golden-hour-portrait",
+      "type": "prompt",
+      "status": "published",
+      "featured": true,
+      "excerpt": "Award-winning Hasselblad H6D-100c studio portrait prompt with customizable lighting angles and skin texture controls.",
+      "content": "## The Concept & Lighting Architecture\n\nThis portrait prompt is calibrated specifically for **Midjourney v6.0** and **Flux.1 Dev** to eliminate artificial plastic skin rendering. By specifying a prime 85mm focal length and directional golden hour rim lighting, the diffusion engine calculates real optical bokeh rather than synthetic blurs.\n\n:::tip\n**Pro Tip for Photographers:** Always add `--style raw` when using Midjourney v6 to disable Midjourney's default saturation boost. This retains authentic micro-skin pores and natural subsurface scattering.\n:::\n\n---\n\n### Key Formula & Parameters:\n1. **Camera Angle:** Eye-level 85mm medium portrait\n2. **Key Lighting:** Low-angle 2800K warm rim light + diffused 5000K fill\n3. **Texture Anchor:** Natural micro-freckles, subtle skin pore fidelity\n4. **Style Parameter:** `--style raw --v 6.0 --ar 3:4`\n\n:::info\n**Compatible AI Models:** Midjourney v6, Flux.1 Schnell/Dev, Google Gemini Imagen 3, Stable Diffusion XL.\n:::\n\n---\n\n### Video Masterclass on Portrait Lighting:\nhttps://www.youtube.com/watch?v=ScMzIvxBSi4\n\n---\n\n### Frequently Asked Questions:\n:::faq\nQ: How do I change the character's eye color or age?\nA: Simply click the \"Customize\" button above or replace the [Subject] variable token with your desired demographics (e.g., \"[elder craftsman with silver beard]\").\nQ: Why does the skin look blurry in low CFG settings?\nA: For Flux.1, keep the CFG scale between 3.0 and 3.8. High CFG values cause chromatic noise, while values below 2.5 can soften facial details.\n:::",
+      "model": "Midjourney v6",
+      "category": "Portraits",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "aspectRatio": "3:4",
+      "prompt": "Cinematic 85mm portrait of [Subject] with natural hyper-detailed skin texture, soft dramatic side [Lighting], muted emerald and warm amber tones, shallow depth of field, award-winning editorial Vogue photography, shot on Hasselblad H6D-100c --ar 3:4 --v 6.0 --style raw",
+      "negativePrompt": "over-smoothed skin, plastic look, cartoon, blur, bad eyes, extra fingers, deformed face, high saturation",
+      "tags": [
+        "85mm",
+        "Golden Hour",
+        "Editorial",
+        "Hasselblad",
+        "Natural Skin",
+        "Raw Style"
+      ],
+      "settings": {
+        "stylize": "250",
+        "lighting": "Low-angle golden hour rim light + soft fill reflector",
+        "lens": "85mm f/1.4 lens, 1/250s, ISO 100"
+      },
+      "variables": [
+        {
+          "name": "Subject",
+          "token": "[Subject]",
+          "defaultValue": "a serene woman with subtle freckles and hazel eyes",
+          "options": [
+            "a serene woman with subtle freckles and hazel eyes",
+            "an elder craftsman with weathered hands and silver beard",
+            "a young jazz trumpeter in a bespoke charcoal blazer",
+            "an athlete with intense gaze catching rainwater droplets"
+          ]
+        },
+        {
+          "name": "Lighting",
+          "token": "[Lighting]",
+          "defaultValue": "golden hour side lighting with warm amber rim highlights",
+          "options": [
+            "golden hour side lighting with warm amber rim highlights",
+            "diffused north-window studio daylight with gentle falloff",
+            "dramatic chiaroscuro candle illumination with deep shadows",
+            "cool twilight ambient glow with soft tungsten accent lamp"
+          ]
+        }
+      ],
+      "seo": {
+        "metaTitle": "Editorial 85mm Portrait Prompt for Midjourney v6 & Flux",
+        "metaDescription": "Tested 85mm Hasselblad portrait prompt with natural skin pores and golden hour lighting.",
+        "focusKeyword": "85mm portrait prompt"
+      },
+      "author": "Elena Rostova",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 1420,
+      "likesCount": 588,
+      "viewsCount": 3410,
+      "createdAt": "2026-09-28",
+      "updatedAt": "2026-09-28",
+      "publishedAt": "2026-09-28"
+    },
+    {
+      "id": "post-2",
+      "title": "Rain-Slicked Tokyo Cyberpunk Alleyway with Holographic Reflections",
+      "slug": "rain-slicked-tokyo-cyberpunk-alleyway",
+      "type": "prompt",
+      "status": "published",
+      "featured": true,
+      "excerpt": "Hyper-detailed rain atmosphere prompt with wet asphalt optical puddles and dense overhead cables.",
+      "content": "## Atmospheric Cinematic Architecture\n\nCapturing authentic cyberpunk environments requires avoiding hyper-saturated cartoon magenta. This prompt anchors the scene with Kodak 5247 film grain, damp street atmosphere, and realistic light refraction on asphalt puddles.\n\n:::warning\n**Avoid Cartoon Artifacts:** Do not use generic words like \"cyberpunk city neon wallpaper\" in your prompt. Ground your prompt in real-world photography terms like \"anamorphic flare\", \"wet asphalt\", and \"Kodachrome\".\n:::\n\n---\n\n### Camera & Lens Specifications\n| Setting | Recommended Value | Impact |\n| :--- | :--- | :--- |\n| **Focal Length** | 35mm Anamorphic | Wide cinematic horizontal field with lens flares |\n| **Aperture** | f/2.0 | Shallow depth of field for background light circles |\n| **Color Temperature** | 3200K / 6500K Dual | High contrast sodium vapor vs cyan neon signs |\n\n---\n\n### Video Reference:\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "model": "Flux.1",
+      "category": "Cyberpunk",
+      "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
+      "aspectRatio": "4:3",
+      "prompt": "Atmospheric [Atmosphere] Tokyo alleyway at twilight, [Key_Elements], neon holographic reflections on wet asphalt puddles, dense overhead electrical cables, steamy noodle shop awning in distance, cinematic Kodachrome film grain, ultra-sharp optical reflections --ar 4:3",
+      "negativePrompt": "blurry, low contrast, washed out colors, daytime sunlight, CGI 3d look",
+      "tags": [
+        "Cyberpunk",
+        "Neon",
+        "Rain",
+        "Tokyo",
+        "Kodachrome",
+        "Atmospheric"
+      ],
+      "settings": {
+        "cfgScale": "3.5",
+        "lighting": "Cyan and magenta neon sign glow reflecting on wet pavement",
+        "lens": "35mm anamorphic cinema lens, f/2.0"
+      },
+      "variables": [
+        {
+          "name": "Atmosphere",
+          "token": "[Atmosphere]",
+          "defaultValue": "rain-slicked, neon-drenched",
+          "options": [
+            "rain-slicked, neon-drenched",
+            "fog-shrouded midnight",
+            "cybernetic market bustle during heavy downpour"
+          ]
+        }
+      ],
+      "seo": {
+        "metaTitle": "Flux.1 Rain-Slicked Tokyo Cyberpunk Prompt",
+        "metaDescription": "Download tested Flux.1 prompt for neon reflections, wet pavement and Tokyo night cinematography.",
+        "focusKeyword": "tokyo cyberpunk prompt"
+      },
+      "author": "Kenji Takahashi",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 2190,
+      "likesCount": 894,
+      "viewsCount": 5120,
+      "createdAt": "2026-09-29",
+      "updatedAt": "2026-09-29",
+      "publishedAt": "2026-09-29"
+    },
+    {
+      "id": "post-3",
+      "title": "The Definitive Guide: How to Structure Prompts for Astro SSG Sites",
+      "slug": "guide-structuring-prompts-for-astro-ssg",
+      "type": "article",
+      "status": "published",
+      "featured": true,
+      "excerpt": "Learn how to use Astro Content Collections and Markdown frontmatter to build ultra-fast, zero-cost AI prompt libraries.",
+      "content": "## Why Astro is the Ultimate Framework for Prompt Directories\n\nWhen you run an AI prompt directory or photography portfolio, page speed is directly tied to user retention. Traditional server-rendered WordPress sites suffer from database queries, PHP execution overhead, and expensive hosting tiers.\n\n:::info\n**Astro SSG Speed Advantage:** Astro builds all prompt cards and articles as pure static HTML during deployment. Zero JavaScript execution on initial page render gives you an instant 100/100 Google Lighthouse score.\n:::\n\n---\n\n### 1. Zero JavaScript by Default\nAstro renders HTML at build time (SSG). Prompts, images, and camera metadata are converted to pristine static HTML, resulting in 100/100 Google Lighthouse scores.\n\n### 2. Markdown Content Collections\nInstead of storing prompts in an SQL database, Astro Content Collections store each prompt as a clean `.md` or `.json` file:\n\n```typescript\n// src/content/config.ts\nimport { defineCollection, z } from 'astro:content';\n\nconst prompts = defineCollection({\n  type: 'content',\n  schema: z.object({\n    title: z.string(),\n    model: z.string(),\n    aspectRatio: z.string(),\n    tags: z.array(z.string()),\n    likes: z.number().default(0),\n  }),\n});\n```\n\n---\n\n### 3. Cloudflare Pages + Webhook Deployments\nWhenever you hit **\"Publish\"** in this WordPress-grade admin panel, a POST request is sent to your Cloudflare Pages Deploy Hook. Cloudflare pulls the latest commit and rebuilds the static HTML in under 20 seconds for $0/month.\n\n:::tip\n**Cost Breakdown:**\n- Cloudflare Pages: $0 / month (Unlimited Bandwidth, Global CDN)\n- GitHub Storage: $0 / month (Public/Private code repository)\n- Sveltia / WP-Admin: $0 / month (Client-side Git CMS)\n- **Total Monthly Expense: $0.00**\n:::",
+      "category": "Tutorials & Guides",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Astro",
+        "Cloudflare Pages",
+        "Webhooks",
+        "Static Site",
+        "Tutorial"
+      ],
+      "seo": {
+        "metaTitle": "Build a Free AI Prompt Library with Astro & Cloudflare Pages",
+        "metaDescription": "Step-by-step masterclass on deploying an Astro SSG prompt site with WordPress-grade admin and auto-deploy webhooks.",
+        "focusKeyword": "astro prompt library"
+      },
+      "author": "Elena Rostova",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 380,
+      "likesCount": 610,
+      "viewsCount": 4280,
+      "createdAt": "2026-09-30",
+      "updatedAt": "2026-09-30",
+      "publishedAt": "2026-09-30"
+    }
+  ],
+  "pages": [
+    {
+      "id": "page-about",
+      "title": "About PromptPlum AI",
+      "slug": "about",
+      "status": "published",
+      "template": "about",
+      "content": "## The Modern Prompt Directory & Studio\n\nPromptPlum is an open-source, high-performance photography and generative AI prompt directory built on **Astro SSG**, **TypeScript**, and a **WordPress-grade Gutenberg block editor**.\n\n### Our Mission\nWe provide creators, photographers, and prompt engineers with tested, verified formulas for **Midjourney v6**, **Flux.1**, **Gemini**, and **DALL·E 3**.\n\n:::tip\n**100% Free Architecture:** Built to run permanently free on Cloudflare Pages with zero monthly database or server hosting fees.\n:::\n\n---\n\n### Key Architectural Pillars\n- **Astro SSG:** Instant sub-50ms page load speeds worldwide.\n- **Visual Gutenberg CMS:** True WordPress block workflow with Save Draft vs Auto-Deploy Publish.\n- **Interactive Variable Engine:** Test prompt variables in browser before generating.",
+      "seo": {
+        "metaTitle": "About PromptPlum AI – Curated AI Image Prompts",
+        "metaDescription": "Learn about PromptPlum AI, our mission, and the free Astro SSG architecture."
+      },
+      "author": "Elena Rostova",
+      "createdAt": "2026-09-01",
+      "updatedAt": "2026-09-28"
+    },
+    {
+      "id": "page-contact",
+      "title": "Contact & Community Support",
+      "slug": "contact",
+      "status": "published",
+      "template": "contact",
+      "content": "## Get in Touch\n\nHave questions about deploying your Astro site, submitting new prompts, or reporting parameter changes in AI models? Send us a message below or join our Discord.",
+      "seo": {
+        "metaTitle": "Contact Us – PromptPlum AI",
+        "metaDescription": "Get in touch with the PromptPlum team."
+      },
+      "author": "Elena Rostova",
+      "createdAt": "2026-09-01",
+      "updatedAt": "2026-09-28"
+    },
+    {
+      "id": "page-privacy",
+      "title": "Privacy Policy & Terms of Use",
+      "slug": "privacy-policy",
+      "status": "published",
+      "template": "default",
+      "content": "## Privacy Policy\n\nPromptPlum operates strictly client-side for prompt customization. No personal data or user prompts are tracked, sold, or shared with third parties.\n\n### Open Source Usage\nAll prompts shared on PromptPlum are licensed under Creative Commons Zero (CC0) for commercial and personal generative AI projects.",
+      "seo": {
+        "metaTitle": "Privacy Policy – PromptPlum AI",
+        "metaDescription": "Privacy policy and CC0 usage terms."
+      },
+      "author": "Elena Rostova",
+      "createdAt": "2026-09-01",
+      "updatedAt": "2026-09-28"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-all",
+      "name": "All Posts",
+      "slug": "all",
+      "description": "Explore all AI prompts, tutorials & guides"
+    },
+    {
+      "id": "cat-portraits",
+      "name": "Portraits",
+      "slug": "portraits",
+      "description": "Studio, candid, and character portrait photography"
+    },
+    {
+      "id": "cat-cinematic",
+      "name": "Cinematic",
+      "slug": "cinematic",
+      "description": "Film stills, 35mm panavision, and movie lighting"
+    },
+    {
+      "id": "cat-realistic",
+      "name": "Realistic",
+      "slug": "realistic",
+      "description": "Hyper-detailed realistic documentary & editorial scenes"
+    },
+    {
+      "id": "cat-fashion",
+      "name": "Fashion & Editorial",
+      "slug": "fashion",
+      "description": "Vogue editorial, sculpted garments, haute couture"
+    },
+    {
+      "id": "cat-cyberpunk",
+      "name": "Cyberpunk & Sci-Fi",
+      "slug": "cyberpunk",
+      "description": "Futuristic megacities, neon rain, holographic reflections"
+    },
+    {
+      "id": "cat-fantasy",
+      "name": "Fantasy & Surreal",
+      "slug": "fantasy",
+      "description": "Dreamscapes, mythical biomes, floating islands"
+    },
+    {
+      "id": "cat-product",
+      "name": "Product & Commercial",
+      "slug": "product",
+      "description": "Studio commercial lighting, cosmetics, luxury goods"
+    },
+    {
+      "id": "cat-tutorials",
+      "name": "Tutorials & Guides",
+      "slug": "tutorials",
+      "description": "In-depth Astro, Midjourney & Flux.1 prompt guides"
+    },
+    {
+      "id": "cat-anime",
+      "name": "Anime & Manga",
+      "slug": "anime",
+      "description": "Makoto Shinkai aesthetic, Studio Ghibli, modern anime keyframes"
+    },
+    {
+      "id": "cat-architecture",
+      "name": "Architecture",
+      "slug": "architecture",
+      "description": "Brutalist concrete, modern minimalist villas, urban design"
+    }
+  ],
+  "tags": [
+    {
+      "id": "tag-1",
+      "name": "85mm",
+      "slug": "85mm"
+    },
+    {
+      "id": "tag-2",
+      "name": "Golden Hour",
+      "slug": "golden-hour"
+    },
+    {
+      "id": "tag-3",
+      "name": "Editorial",
+      "slug": "editorial"
+    },
+    {
+      "id": "tag-4",
+      "name": "Hasselblad",
+      "slug": "hasselblad"
+    },
+    {
+      "id": "tag-5",
+      "name": "Cyberpunk",
+      "slug": "cyberpunk"
+    },
+    {
+      "id": "tag-6",
+      "name": "Neon",
+      "slug": "neon"
+    },
+    {
+      "id": "tag-7",
+      "name": "Tokyo",
+      "slug": "tokyo"
+    },
+    {
+      "id": "tag-8",
+      "name": "Astro",
+      "slug": "astro"
+    },
+    {
+      "id": "tag-9",
+      "name": "Cloudflare",
+      "slug": "cloudflare"
+    },
+    {
+      "id": "tag-10",
+      "name": "Midjourney v6",
+      "slug": "midjourney-v6"
+    }
+  ],
+  "media": [
+    {
+      "id": "med-1",
+      "name": "cinematic-portrait-85mm.jpg",
+      "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "size": "1.2 MB",
+      "dimensions": "1536 x 2048",
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2026-09-28"
+    },
+    {
+      "id": "med-2",
+      "name": "cyberpunk-tokyo-night.jpg",
+      "url": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
+      "size": "1.4 MB",
+      "dimensions": "2048 x 1536",
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2026-09-29"
+    },
+    {
+      "id": "med-3",
+      "name": "astro-code-laptop.jpg",
+      "url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+      "size": "980 KB",
+      "dimensions": "1920 x 1080",
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2026-09-30"
+    }
+  ],
+  "comments": [
+    {
+      "id": "comm-1",
+      "postId": "post-1",
+      "authorName": "Alex Morgan",
+      "authorEmail": "alex@creativestudio.design",
+      "content": "Tested this 85mm portrait prompt in Midjourney v6 with the jazz musician subject variable—the lighting falloff on the lapel is stunning!",
+      "status": "approved",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "id": "comm-2",
+      "postId": "post-2",
+      "authorName": "Sarah Jenkins",
+      "authorEmail": "sarah@artstation.com",
+      "content": "The asphalt reflections in Flux.1 are incredible. Great tip on avoiding generic neon keywords.",
+      "status": "approved",
+      "createdAt": "2026-09-30"
+    }
+  ],
+  "menus": {
+    "primary": [
+      {
+        "id": "m-1",
+        "label": "Explore Prompts",
+        "url": "#explore"
+      },
+      {
+        "id": "m-2",
+        "label": "Articles & Guides",
+        "url": "#articles"
+      },
+      {
+        "id": "m-3",
+        "label": "About",
+        "url": "/about"
+      },
+      {
+        "id": "m-4",
+        "label": "Contact",
+        "url": "/contact"
+      }
+    ],
+    "footer": [
+      {
+        "id": "fm-1",
+        "label": "All Prompts",
+        "url": "#explore"
+      },
+      {
+        "id": "fm-2",
+        "label": "Articles & Guides",
+        "url": "#articles"
+      },
+      {
+        "id": "fm-3",
+        "label": "About Us",
+        "url": "/about"
+      },
+      {
+        "id": "fm-4",
+        "label": "Contact Support",
+        "url": "/contact"
+      },
+      {
+        "id": "fm-5",
+        "label": "Privacy & CC0 Terms",
+        "url": "/privacy-policy"
+      }
+    ]
+  },
+  "settings": {
+    "siteTitle": "PromptPlum AI",
+    "tagline": "Astro-Powered AI Photo Prompts & Photography Masterclasses",
+    "adminEmail": "admin@promptplum.com",
+    "postsPerPage": 12,
+    "enableComments": true,
+    "enableModeration": true,
+    "webhookUrl": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/demo-hook-9981",
+    "autoDeployOnPublish": true,
+    "githubRepo": "promptplum/promptplum-astro",
+    "githubBranch": "main"
+  },
+  "customizer": {
+    "siteTitle": "PromptPlum AI",
+    "tagline": "Astro-Powered AI Photo Prompts & Photography Masterclasses",
+    "brandColor": "#8b5cf6",
+    "headerNotice": "⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled",
+    "headerNoticeLink": "#deploy",
+    "hero": {
+      "kicker": "Curated AI Photo Editing & Generative Prompts · Tested & Verified",
+      "title": "PromptPlum AI Prompts Library",
+      "subtitle": "Discover, customize, and copy tested AI photography prompts for Midjourney, Gemini, ChatGPT, and Flux. 100% free Cloudflare Pages + Astro SSG deployment.",
+      "searchPlaceholder": "Search prompts, photography styles, cameras, lighting, keywords...",
+      "trendingTags": [
+        "85mm Portrait",
+        "Golden Hour",
+        "Cyberpunk",
+        "Tokyo",
+        "Haute Couture",
+        "Cinema Still",
+        "Anime Ghibli",
+        "Minimalist Product",
+        "Brutalism"
+      ],
+      "proofText": "Astro Content Collections · 5 AI Engines · Auto-Deploy Webhooks · Cloudflare Ready"
+    },
+    "featuredSection": {
+      "enabled": true,
+      "badge": "Spotlight Collection",
+      "title": "Featured Masterpieces & Masterclasses",
+      "subtitle": "Hand-tested prompts curated by photography directors and prompt engineers."
+    },
+    "faqSection": {
+      "enabled": true,
+      "badge": "Frequently Asked Questions",
+      "title": "Everything you need to know about PromptPlum",
+      "subtitle": "Learn how PromptPlum runs 100% free on Cloudflare Pages + Astro SSG.",
+      "items": [
+        {
+          "id": "faq-1",
+          "question": "How do I copy and customize variable tokens like [Subject] in a prompt?",
+          "answer": "Click the \"Customize\" button on any prompt card to open the interactive variable switcher. Select or type your subject/lighting, and click \"Copy Customized Prompt\" to copy the finalized prompt."
+        },
+        {
+          "id": "faq-2",
+          "question": "How does the WordPress-grade Auto-Deploy work on Cloudflare Pages?",
+          "answer": "When you click \"Save Draft\", your changes are saved locally with zero build costs. When you click \"Publish\", the admin panel triggers your Cloudflare Deploy Hook to build and refresh static Astro HTML in ~2.8 seconds worldwide."
+        },
+        {
+          "id": "faq-3",
+          "question": "Is hosting and content management 100% free forever?",
+          "answer": "Yes! Cloudflare Pages offers unlimited bandwidth and global CDN for free, GitHub stores the repository and markdown content for free, and Sveltia CMS / WP-Admin runs 100% client-side in your browser."
+        },
+        {
+          "id": "faq-4",
+          "question": "Which AI engines and generators are supported?",
+          "answer": "We support Midjourney v6, Black Forest Labs Flux.1, Google Gemini (Imagen 3), ChatGPT (DALL·E 3), and Stable Diffusion XL."
+        }
+      ]
+    },
+    "ctaSection": {
+      "enabled": true,
+      "badge": "Ready to Deploy Your Own Site?",
+      "title": "Launch Your Own Free AI Prompt Directory in 2 Minutes",
+      "subtitle": "Connect your GitHub repository to Cloudflare Pages and publish prompts with zero server costs.",
+      "buttonText": "Open Cloudflare Setup Guide",
+      "buttonLink": "#deploy",
+      "secondaryButtonText": "Browse Full Prompt Library"
+    },
+    "footer": {
+      "brandName": "PromptPlum AI",
+      "bio": "Curated library of tested photo editing & generative prompts for Midjourney, Flux.1, Gemini, and ChatGPT. Built with Astro SSG and WordPress-grade Publishing Workflow.",
+      "copyrightText": "© 2026 PromptPlum AI · Open Source Architecture",
+      "links": [
+        {
+          "label": "Explore All Prompts",
+          "url": "#explore"
+        },
+        {
+          "label": "Articles & Masterclasses",
+          "url": "#articles"
+        },
+        {
+          "label": "Prompt Studio",
+          "url": "#generator"
+        },
+        {
+          "label": "Saved Favorites",
+          "url": "#favorites"
+        }
+      ],
+      "socialTwitter": "https://twitter.com",
+      "socialDiscord": "https://discord.com",
+      "socialGithub": "https://github.com",
+      "socialYoutube": "https://youtube.com"
+    },
+    "postsPerPage": 12,
+    "enablePromptBuilder": true
+  },
+  "deployLogs": [
+    {
+      "id": "deploy-init",
+      "timestamp": "2026-10-01 20:45:10",
+      "triggerEvent": "Initial Astro Static Site Build",
+      "status": "success",
+      "hookUrl": "https://api.cloudflare.com/...",
+      "durationMs": 4200,
+      "responseStatus": 200,
+      "message": "Astro Content Collections compiled successfully. Deployed to 280+ Cloudflare edge nodes."
+    }
+  ]
+}

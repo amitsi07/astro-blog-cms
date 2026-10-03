@@ -1,27 +1,72 @@
+# Sveltia CMS Configuration for PromptPlum
+# Designed to run 100% Free on Cloudflare Pages + GitHub
+
 backend:
   name: github
-  repo: amitsi07/astro-blog-cms
+  repo: your-username/promptplum-ai # Replace with your GitHub user/repo
   branch: main
+  # Sveltia supports free GitHub OAuth via auth proxies or personal tokens
+  auth_type: implicit
+  base_url: https://sveltia-cms-auth.vercel.app
 
-media_folder: 'public/images/uploads'
-public_folder: '/images/uploads'
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+display_url: "/"
+logo_url: "/logo.svg"
 
 collections:
-  - name: 'posts'
-    label: 'Prompts & Articles'
-    folder: 'src/content/posts'
+  - name: "prompts"
+    label: "AI Prompts"
+    label_singular: "Prompt"
+    folder: "content/prompts"
     create: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
+    format: "json"
     fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Slug', name: 'slug', widget: 'string' }
-      - { label: 'Type', name: 'type', widget: 'select', options: ['prompt', 'article', 'page'], default: 'prompt' }
-      - { label: 'Status', name: 'status', widget: 'select', options: ['draft', 'published'], default: 'published' }
-      - { label: 'Category', name: 'category', widget: 'string' }
-      - { label: 'AI Model', name: 'model', widget: 'string', required: false }
-      - { label: 'Aspect Ratio', name: 'aspectRatio', widget: 'string', default: '3:4' }
-      - { label: 'Image URL', name: 'image', widget: 'string' }
-      - { label: 'Prompt Body', name: 'prompt', widget: 'text', required: false }
-      - { label: 'Negative Prompt', name: 'negativePrompt', widget: 'string', required: false }
-      - { label: 'Excerpt', name: 'excerpt', widget: 'text' }
-      - { label: 'Content Body', name: 'body', widget: 'markdown' }
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "AI Model", name: "model", widget: "select", options: [
+          "Midjourney v6",
+          "Gemini / Imagen 3",
+          "ChatGPT / DALL·E 3",
+          "Flux.1",
+          "Stable Diffusion XL"
+        ] }
+      - { label: "Category", name: "category", widget: "select", options: [
+          "Portraits",
+          "Cinematic",
+          "Realistic",
+          "Fashion",
+          "Cyberpunk",
+          "Fantasy",
+          "Product",
+          "3D Art",
+          "Anime",
+          "Architecture"
+        ] }
+      - { label: "Image URL or Upload", name: "image", widget: "image" }
+      - { label: "Aspect Ratio", name: "aspectRatio", widget: "select", options: ["1:1", "16:9", "9:16", "4:3", "3:4", "4:5"] }
+      - { label: "Prompt Text", name: "prompt", widget: "text" }
+      - { label: "Negative Prompt", name: "negativePrompt", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Recommended Settings", name: "settings", widget: "object", fields: [
+          { label: "Stylize / CFG", name: "stylize", widget: "string", required: false },
+          { label: "Lighting", name: "lighting", widget: "string", required: false },
+          { label: "Camera & Lens", name: "lens", widget: "string", required: false }
+        ]}
+      - { label: "Featured in Hero", name: "featured", widget: "boolean", default: false }
+      - { label: "Author", name: "author", widget: "string", default: "PromptPlum Community" }
+
+  - name: "categories"
+    label: "Categories"
+    folder: "content/categories"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Icon Name", name: "icon", widget: "string" }

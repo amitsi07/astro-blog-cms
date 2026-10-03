@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const postsCollection = defineCollection({
+const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
   schema: z.object({
     id: z.string(),
@@ -36,7 +36,7 @@ const postsCollection = defineCollection({
       metaDescription: z.string().optional(),
       focusKeyword: z.string().optional(),
     }).optional(),
-    author: z.string().default('Editor'),
+    author: z.string().default('Elena Rostova'),
     copiesCount: z.number().default(0),
     likesCount: z.number().default(0),
     viewsCount: z.number().default(0),
@@ -46,6 +46,4 @@ const postsCollection = defineCollection({
   }),
 });
 
-export const collections = {
-  posts: postsCollection,
-};
+export const collections = { posts };

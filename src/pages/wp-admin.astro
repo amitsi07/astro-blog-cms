@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { WordPressAdmin } from '../components/admin/WordPressAdmin';
+import { PromptProvider } from '../context/PromptContext';
+---
+
+<Layout title="WordPress Admin CMS & Gutenberg Studio – PromptPlum AI">
+  <div class="min-h-screen bg-[#0b0c10]">
+    <PromptProvider client:only="react">
+      <WordPressAdmin client:only="react" />
+    </PromptProvider>
+  </div>
+</Layout>
