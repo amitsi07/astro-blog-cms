@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { usePrompts } from '../../context/PromptContext';
 import { 
   PostItem, 
@@ -56,7 +56,12 @@ import {
   Undo2,
   Redo2,
   FileCode,
-  LayoutGrid
+  LayoutGrid,
+  Upload,
+  FolderOpen,
+  UploadCloud,
+  CheckCircle2,
+  X
 } from 'lucide-react';
 
 interface PostEditorProps {
@@ -287,6 +292,7 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
     posts, 
     categories, 
     mediaList, 
+    addMedia,
     saveDraft, 
     publishPost, 
     isBuilding, 
@@ -308,6 +314,65 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
   const [editorMode, setEditorMode] = useState<'visual' | 'code'>('visual');
   const [showBlockPicker, setShowBlockPicker] = useState(false);
   const [insertIndex, setInsertIndex] = useState<number | null>(null);
+
+  // File Upload and Media Picker states
+  const featuredFileInputRef = useRef<HTMLInputElement>(null);
+  const blockFileInputRef = useRef<HTMLInputElement>(null);
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
+  const [targetBlockIdx, setTargetBlockIdx] = useState<number | null>(null);
+
+  const SAMPLE_PRESET_IMAGES = [
+    { name: '85mm Portrait', url: '/images/cinematic_portrait_1790912658842.jpg' },
+    { name: 'Cyberpunk Tokyo', url: '/images/cyberpunk_tokyo_1790912672961.jpg' },
+    { name: 'Fashion Editorial', url: '/images/fashion_editorial_1790912686462.jpg' },
+    { name: 'Fantasy Island', url: '/images/fantasy_landscape_1790912697089.jpg' },
+  ];
+
+  const handleFeaturedFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      setImage(dataUrl);
+      addMedia({
+        name: file.name,
+        url: dataUrl,
+        size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+        dimensions: 'Original',
+        mimeType: file.type || 'image/jpeg'
+      });
+      showToast(`Uploaded "${file.name}" as featured image`);
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  const handleBlockImageFileUpload = (e: React.ChangeEvent<HTMLInputElement>, blockIdx: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      const targetBlock = blocks[blockIdx];
+      if (targetBlock.type === 'gallery') {
+        const newImages = [...(targetBlock.images || []), { url: dataUrl, caption: file.name }];
+        updateBlockData(blockIdx, { images: newImages });
+      } else {
+        updateBlockData(blockIdx, { url: dataUrl, caption: file.name });
+      }
+      addMedia({
+        name: file.name,
+        url: dataUrl,
+        size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+        dimensions: 'Original',
+        mimeType: file.type || 'image/jpeg'
+      });
+      showToast(`Uploaded "${file.name}" to content block`);
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
 
   // AI Prompt specific states
   const [model, setModel] = useState<AIModel>(existingPost?.model || 'Midjourney v6');
@@ -1175,18 +1240,91 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
                 )}
 
                 {/* Featured Image */}
-                <div className="space-y-1.5">
-                  <label className="block font-medium text-slate-300">Featured Image URL</label>
-                  <input
-                    type="text"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                    placeholder="https://..."
-                    className="w-full bg-[#10121b] border border-[#272b3e] rounded-lg px-3 py-2 text-slate-200 focus:outline-none focus:border-violet-500"
-                  />
+                <div className="space-y-2 bg-[#10121b] p-3.5 rounded-xl border border-[#272b3e]">
+                  <div className="flex items-center justify-between">
+                    <label className="block font-semibold text-slate-200 text-xs flex items-center gap-1.5">
+                      <ImageIcon className="w-3.5 h-3.5 text-violet-400" />
+                      <span>Featured Image</span>
+                    </label>
+                    <span className="text-[10px] text-slate-400 font-mono">JPG, PNG, WebP</span>
+                  </div>
+
+                  {/* Upload Actions Toolbar */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="file"
+                      ref={featuredFileInputRef}
+                      accept="image/*"
+                      onChange={handleFeaturedFileUpload}
+                      className="hidden"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => featuredFileInputRef.current?.click()}
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs transition-colors cursor-pointer shadow-sm"
+                    >
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Upload Image</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setTargetBlockIdx(null); setShowMediaPicker(true); }}
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#1c1f2e] hover:bg-[#282c42] text-slate-200 hover:text-white border border-[#2e334d] font-semibold text-xs transition-colors cursor-pointer"
+                    >
+                      <FolderOpen className="w-3.5 h-3.5 text-blue-400" />
+                      <span>Media Library</span>
+                    </button>
+                  </div>
+
+                  {/* Quick Sample Presets */}
+                  <div className="space-y-1 pt-1">
+                    <span className="text-[10px] text-slate-400 font-medium">Or pick AI preset:</span>
+                    <div className="grid grid-cols-4 gap-1.5">
+                      {SAMPLE_PRESET_IMAGES.map((preset, pIdx) => (
+                        <button
+                          key={pIdx}
+                          type="button"
+                          onClick={() => setImage(preset.url)}
+                          className={`aspect-square rounded-lg overflow-hidden border ${image === preset.url ? 'border-violet-500 ring-2 ring-violet-500/40' : 'border-[#2e334d] hover:border-violet-400'} relative group cursor-pointer transition-all`}
+                          title={preset.name}
+                        >
+                          <img src={preset.url} alt={preset.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Direct URL Input */}
+                  <div className="space-y-1 pt-1">
+                    <input
+                      type="text"
+                      value={image}
+                      onChange={(e) => setImage(e.target.value)}
+                      placeholder="Or paste external image URL..."
+                      className="w-full bg-[#08090f] border border-[#24283b] rounded-lg px-2.5 py-1.5 text-xs text-slate-300 focus:outline-none focus:border-violet-500 font-mono"
+                    />
+                  </div>
+
+                  {/* Preview Card */}
                   {image && (
-                    <div className="rounded-lg overflow-hidden border border-[#272b3e] mt-2 aspect-video bg-black">
-                      <img src={image} alt="Preview" className="w-full h-full object-cover" />
+                    <div className="relative rounded-lg overflow-hidden border border-[#272b3e] mt-2 aspect-video bg-black group shadow-md">
+                      <img src={image} alt="Featured Preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => featuredFileInputRef.current?.click()}
+                          className="px-2.5 py-1 rounded bg-violet-600 hover:bg-violet-500 text-white text-[11px] font-semibold cursor-pointer"
+                        >
+                          Replace
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setImage('')}
+                          className="px-2.5 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-semibold cursor-pointer"
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -1327,6 +1465,89 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
                   </button>
                 );
               })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Media Library Picker Modal */}
+      {showMediaPicker && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#151724] border border-[#2b2f44] rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 max-h-[85vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-[#242738]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center">
+                  <FolderOpen className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white">Select from Media Library</h3>
+                  <p className="text-xs text-slate-400">Choose an image for your post or upload a new one</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowMediaPicker(false)}
+                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-[#222538] cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Upload New in Modal */}
+            <div className="flex items-center justify-between bg-[#0e1018] p-3 rounded-xl border border-[#24283b]">
+              <span className="text-xs text-slate-300">Upload a new photo from your device:</span>
+              <button
+                type="button"
+                onClick={() => featuredFileInputRef.current?.click()}
+                className="px-3 py-1.5 rounded-lg bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                <span>Browse Files</span>
+              </button>
+            </div>
+
+            {/* Media Grid */}
+            <div className="flex-1 overflow-y-auto pr-1">
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                {mediaList.map((med) => (
+                  <button
+                    key={med.id}
+                    type="button"
+                    onClick={() => {
+                      if (targetBlockIdx !== null) {
+                        const targetBlock = blocks[targetBlockIdx];
+                        if (targetBlock.type === 'gallery') {
+                          const newImages = [...(targetBlock.images || []), { url: med.url, caption: med.name }];
+                          updateBlockData(targetBlockIdx, { images: newImages });
+                        } else {
+                          updateBlockData(targetBlockIdx, { url: med.url, caption: med.name });
+                        }
+                      } else {
+                        setImage(med.url);
+                      }
+                      setShowMediaPicker(false);
+                      showToast(`Selected "${med.name}"`);
+                    }}
+                    className="group relative aspect-square rounded-xl overflow-hidden border border-[#272b3e] hover:border-violet-500 bg-[#0d0e17] transition-all cursor-pointer text-left"
+                  >
+                    <img src={med.url} alt={med.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-2">
+                      <span className="text-[10px] font-semibold text-white truncate">{med.name}</span>
+                      <span className="text-[9px] text-violet-300 font-mono">{med.dimensions}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-[#242738] flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowMediaPicker(false)}
+                className="px-4 py-2 rounded-xl bg-[#202334] hover:bg-[#2c3048] text-slate-200 text-xs font-semibold cursor-pointer"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

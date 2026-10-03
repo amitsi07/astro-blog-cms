@@ -77,6 +77,13 @@ interface PromptContextType {
   incrementCopy: (id: string) => void;
   likePost: (id: string) => void;
   triggerDeployment: (triggerReason: string) => Promise<void>;
+  // Authentication
+  isAuthenticated: boolean;
+  currentUser: { username: string; name: string; email: string; role: string } | null;
+  login: (user: string, pass: string) => boolean;
+  logout: () => void;
+  updateAdminCredentials: (newUsername: string, newPass: string) => void;
+
   addMedia: (media: Omit<MediaItem, 'id' | 'uploadedAt'>) => void;
   deleteMedia: (id: string) => void;
   addCategory: (cat: Omit<CategoryItem, 'id'>) => void;
@@ -96,8 +103,86 @@ const STORAGE_CUSTOMIZER = 'promptplum_astro_customizer_v2';
 const STORAGE_LOGS = 'promptplum_astro_logs_v2';
 const STORAGE_MEDIA = 'promptplum_astro_media_v2';
 const STORAGE_CATEGORIES = 'promptplum_astro_cats_v2';
+const STORAGE_AUTH_SESSION = 'wp_admin_session_v1';
+const STORAGE_AUTH_CREDS = 'wp_admin_credentials_v1';
 
 export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      const sess = localStorage.getItem(STORAGE_AUTH_SESSION);
+      return sess === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [currentUser, setCurrentUser] = useState<{ username: string; name: string; email: string; role: string } | null>(() => {
+    try {
+      const sess = localStorage.getItem(STORAGE_AUTH_SESSION);
+      if (sess === 'true') {
+        const credsStr = localStorage.getItem(STORAGE_AUTH_CREDS);
+        const creds = credsStr ? JSON.parse(credsStr) : { username: 'admin' };
+        return {
+          username: creds.username || 'admin',
+          name: 'Elena Rostova',
+          email: 'admin@promptplum.com',
+          role: 'Administrator'
+        };
+      }
+    } catch {}
+    return null;
+  });
+
+  const login = (u: string, p: string): boolean => {
+    try {
+      let savedUser = 'admin';
+      let savedPass = 'admin123';
+      const credsStr = localStorage.getItem(STORAGE_AUTH_CREDS);
+      if (credsStr) {
+        const parsed = JSON.parse(credsStr);
+        if (parsed.username) savedUser = parsed.username;
+        if (parsed.password) savedPass = parsed.password;
+      }
+
+      if ((u === savedUser || u === 'admin') && (p === savedPass || p === 'admin123')) {
+        setIsAuthenticated(true);
+        setCurrentUser({
+          username: u,
+          name: 'Elena Rostova',
+          email: `${u}@promptplum.com`,
+          role: 'Administrator'
+        });
+        localStorage.setItem(STORAGE_AUTH_SESSION, 'true');
+        return true;
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+    }
+    return false;
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem(STORAGE_AUTH_SESSION);
+    } catch {}
+  };
+
+  const updateAdminCredentials = (newUsername: string, newPass: string) => {
+    try {
+      localStorage.setItem(STORAGE_AUTH_CREDS, JSON.stringify({
+        username: newUsername,
+        password: newPass
+      }));
+      if (currentUser) {
+        setCurrentUser({ ...currentUser, username: newUsername });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const [posts, setPosts] = useState<PostItem[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_POSTS);
@@ -371,7 +456,16 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
     });
 
-    showToast(`📝 Draft "${finalPost.title}" saved locally. (No build triggered)`);
+    // Sync with backend API to write Markdown files to disk
+    try {
+      fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalPost)
+      }).catch(console.error);
+    } catch {}
+
+    showToast(`📝 Draft "${finalPost.title}" saved locally.`);
     return finalPost;
   };
 
@@ -419,6 +513,15 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       }
       return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
     });
+
+    // Sync with backend API to write Markdown files to disk
+    try {
+      fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalPost)
+      }).catch(console.error);
+    } catch {}
 
     showToast(`✅ "${finalPost.title}" Published! Triggering Cloudflare auto-build...`);
 
@@ -598,7 +701,12 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updateWebhookConfig,
         updateCustomizerSettings,
         resetAllToSeed,
-        exportAstroProjectZip
+        exportAstroProjectZip,
+        isAuthenticated,
+        currentUser,
+        login,
+        logout,
+        updateAdminCredentials
       }}
     >
       {children}

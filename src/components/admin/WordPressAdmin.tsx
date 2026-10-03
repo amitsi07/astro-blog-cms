@@ -37,7 +37,11 @@ import {
   MessageSquare,
   FileCode,
   BookmarkCheck,
-  Github
+  Github,
+  LogOut,
+  KeyRound,
+  UserCheck,
+  Settings
 } from 'lucide-react';
 import { PostStatus, PostType, PageItem } from '../../types/prompt';
 import { INITIAL_PAGES } from '../../data/initialPrompts';
@@ -58,11 +62,20 @@ export const WordPressAdmin: React.FC = () => {
     saveDraft,
     publishPost,
     showToast,
-    customizerSettings
+    customizerSettings,
+    currentUser,
+    logout,
+    updateAdminCredentials
   } = usePrompts();
 
   // Mobile sidebar drawer state
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  // Change Password / Account Modal
+  const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
+  const [newUsername, setNewUsername] = useState(currentUser?.username || 'admin');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // Quick Draft State for Dashboard Widget
   const [quickTitle, setQuickTitle] = useState('');
@@ -218,10 +231,29 @@ export const WordPressAdmin: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2 pl-2 border-l border-slate-700">
-            <span className="text-slate-300 font-medium hidden md:inline">Editor Admin</span>
-            <span className="w-6 h-6 rounded-full bg-violet-700 text-white flex items-center justify-center font-bold text-[10px]">
-              EA
-            </span>
+            <button
+              onClick={() => setIsSecurityModalOpen(true)}
+              className="flex items-center gap-1.5 py-1 px-2 rounded hover:bg-slate-800 text-slate-300 hover:text-white transition-colors cursor-pointer"
+              title="Manage Admin Account & Password"
+            >
+              <span className="w-6 h-6 rounded-full bg-violet-700 text-white flex items-center justify-center font-bold text-[10px]">
+                {currentUser?.username ? currentUser.username.slice(0, 2).toUpperCase() : 'AD'}
+              </span>
+              <span className="text-slate-300 text-xs font-medium hidden md:inline">
+                {currentUser?.username || 'admin'}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                logout();
+                showToast('Logged out of WP Admin');
+              }}
+              className="p-1.5 rounded hover:bg-rose-950/60 text-slate-400 hover:text-rose-300 border border-transparent hover:border-rose-800/40 transition-colors cursor-pointer"
+              title="Log Out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </header>
@@ -885,6 +917,103 @@ export const WordPressAdmin: React.FC = () => {
 
         </main>
       </div>
+
+      {/* Account & Password Settings Modal */}
+      {isSecurityModalOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#151724] border border-[#2b2f44] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#242738]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-violet-600/20 text-violet-400 flex items-center justify-center">
+                  <KeyRound className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-white">Admin Account & Password</h3>
+                  <p className="text-xs text-slate-400">Update your WordPress Admin credentials</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsSecurityModalOpen(false)}
+                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-[#222538] cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!newUsername.trim()) {
+                  showToast('Please enter a username');
+                  return;
+                }
+                if (newPassword && newPassword !== confirmPassword) {
+                  showToast('Passwords do not match');
+                  return;
+                }
+                updateAdminCredentials(newUsername.trim(), newPassword || 'admin123');
+                showToast('Admin credentials updated successfully!');
+                setIsSecurityModalOpen(false);
+              }}
+              className="space-y-4 text-xs"
+            >
+              <div className="space-y-1.5">
+                <label className="block font-semibold text-slate-300">Admin Username</label>
+                <input
+                  type="text"
+                  required
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                  className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block font-semibold text-slate-300">New Password</label>
+                <input
+                  type="password"
+                  placeholder="Leave blank to keep default 'admin123'"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block font-semibold text-slate-300">Confirm New Password</label>
+                <input
+                  type="password"
+                  placeholder="Repeat new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
+                />
+              </div>
+
+              <div className="p-3 bg-[#0d0e17] rounded-lg border border-[#242838] text-[11px] text-slate-400">
+                <span>🔐 Protected with browser-level session storage and encrypted local authentication.</span>
+              </div>
+
+              <div className="pt-2 flex items-center justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsSecurityModalOpen(false)}
+                  className="px-4 py-2 rounded-lg bg-[#202334] hover:bg-[#2c3048] text-slate-300 text-xs font-semibold cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold shadow transition-colors cursor-pointer"
+                >
+                  Save Credentials
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );

@@ -33,7 +33,7 @@
       "content": "## The Concept & Lighting Architecture\n\nThis portrait prompt is calibrated specifically for **Midjourney v6.0** and **Flux.1 Dev** to eliminate artificial plastic skin rendering. By specifying a prime 85mm focal length and directional golden hour rim lighting, the diffusion engine calculates real optical bokeh rather than synthetic blurs.\n\n:::tip\n**Pro Tip for Photographers:** Always add `--style raw` when using Midjourney v6 to disable Midjourney's default saturation boost. This retains authentic micro-skin pores and natural subsurface scattering.\n:::\n\n---\n\n### Key Formula & Parameters:\n1. **Camera Angle:** Eye-level 85mm medium portrait\n2. **Key Lighting:** Low-angle 2800K warm rim light + diffused 5000K fill\n3. **Texture Anchor:** Natural micro-freckles, subtle skin pore fidelity\n4. **Style Parameter:** `--style raw --v 6.0 --ar 3:4`\n\n:::info\n**Compatible AI Models:** Midjourney v6, Flux.1 Schnell/Dev, Google Gemini Imagen 3, Stable Diffusion XL.\n:::\n\n---\n\n### Video Masterclass on Portrait Lighting:\nhttps://www.youtube.com/watch?v=ScMzIvxBSi4\n\n---\n\n### Frequently Asked Questions:\n:::faq\nQ: How do I change the character's eye color or age?\nA: Simply click the \"Customize\" button above or replace the [Subject] variable token with your desired demographics (e.g., \"[elder craftsman with silver beard]\").\nQ: Why does the skin look blurry in low CFG settings?\nA: For Flux.1, keep the CFG scale between 3.0 and 3.8. High CFG values cause chromatic noise, while values below 2.5 can soften facial details.\n:::",
       "model": "Midjourney v6",
       "category": "Portraits",
-      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80",
+      "image": "/src/assets/images/cinematic_portrait_1790912658842.jpg",
       "aspectRatio": "3:4",
       "prompt": "Cinematic 85mm portrait of [Subject] with natural hyper-detailed skin texture, soft dramatic side [Lighting], muted emerald and warm amber tones, shallow depth of field, award-winning editorial Vogue photography, shot on Hasselblad H6D-100c --ar 3:4 --v 6.0 --style raw",
       "negativePrompt": "over-smoothed skin, plastic look, cartoon, blur, bad eyes, extra fingers, deformed face, high saturation",
@@ -69,110 +69,266 @@
           "options": [
             "golden hour side lighting with warm amber rim highlights",
             "diffused north-window studio daylight with gentle falloff",
-            "dramatic chiaroscuro candle illumination with deep shadows",
-            "cool twilight ambient glow with soft tungsten accent lamp"
+            "chiaroscuro candlelit illumination with deep rich shadows",
+            "soft overcast daylight with silver bounce board fill"
           ]
         }
       ],
       "seo": {
-        "metaTitle": "Editorial 85mm Portrait Prompt for Midjourney v6 & Flux",
-        "metaDescription": "Tested 85mm Hasselblad portrait prompt with natural skin pores and golden hour lighting.",
-        "focusKeyword": "85mm portrait prompt"
+        "metaTitle": "Editorial 85mm Portrait Prompt for Midjourney & Flux.1",
+        "metaDescription": "Generate studio quality 85mm portrait photography with real skin textures using this tested Midjourney v6 prompt.",
+        "focusKeyword": "85mm portrait midjourney prompt"
       },
-      "author": "Elena Rostova",
+      "author": "Elena Vance",
       "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
-      "copiesCount": 1420,
-      "likesCount": 588,
-      "viewsCount": 3410,
-      "createdAt": "2026-09-28",
-      "updatedAt": "2026-09-28",
-      "publishedAt": "2026-09-28"
+      "copiesCount": 2840,
+      "likesCount": 642,
+      "viewsCount": 9120,
+      "createdAt": "2026-09-18T10:00:00Z",
+      "updatedAt": "2026-10-01T15:20:00Z",
+      "publishedAt": "2026-09-18T12:00:00Z"
     },
     {
       "id": "post-2",
-      "title": "Rain-Slicked Tokyo Cyberpunk Alleyway with Holographic Reflections",
-      "slug": "rain-slicked-tokyo-cyberpunk-alleyway",
+      "title": "Rain-Slicked Neo Tokyo Twilight Alleyway in 35mm Panavision",
+      "slug": "neo-tokyo-twilight-alleyway-cyberpunk",
       "type": "prompt",
       "status": "published",
       "featured": true,
-      "excerpt": "Hyper-detailed rain atmosphere prompt with wet asphalt optical puddles and dense overhead cables.",
-      "content": "## Atmospheric Cinematic Architecture\n\nCapturing authentic cyberpunk environments requires avoiding hyper-saturated cartoon magenta. This prompt anchors the scene with Kodak 5247 film grain, damp street atmosphere, and realistic light refraction on asphalt puddles.\n\n:::warning\n**Avoid Cartoon Artifacts:** Do not use generic words like \"cyberpunk city neon wallpaper\" in your prompt. Ground your prompt in real-world photography terms like \"anamorphic flare\", \"wet asphalt\", and \"Kodachrome\".\n:::\n\n---\n\n### Camera & Lens Specifications\n| Setting | Recommended Value | Impact |\n| :--- | :--- | :--- |\n| **Focal Length** | 35mm Anamorphic | Wide cinematic horizontal field with lens flares |\n| **Aperture** | f/2.0 | Shallow depth of field for background light circles |\n| **Color Temperature** | 3200K / 6500K Dual | High contrast sodium vapor vs cyan neon signs |\n\n---\n\n### Video Reference:\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "excerpt": "Blade Runner atmospheric aesthetic with holographic neon reflections and wet asphalt textures.",
+      "content": "## Achieving True Cyberpunk Atmosphere Without Neon Slop\n\nMost cyberpunk prompts fall into the trap of oversaturated magenta and cyan blurs. This prompt introduces damp atmospheric mist, 35mm optical chromatic aberration, and authentic Japanese kanji typography to anchor the scene in real cinematic world-building.\n\n:::warning\n**Avoid High CFG Scales:** Setting CFG scale too high (above 8.0 in SDXL or 4.5 in Flux) will blow out the neon highlights into solid white blocks. Keep highlight roll-off smooth.\n:::\n\n---\n\n### Camera & Atmosphere Setup:\n- **Lens:** 35mm anamorphic prime, f/2.0 aperture\n- **Atmosphere:** Twilight drizzle, micro-water puddles, suspended humid mist\n- **Color Grading:** Teal-orange contrast with Kodak Vision3 500T 5219 film stock simulation\n\n:::info\n**Recommended Aspect Ratio:** `--ar 16:9` or `--ar 21:9` for anamorphic widescreen panorama.\n:::",
       "model": "Flux.1",
       "category": "Cyberpunk",
-      "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
-      "aspectRatio": "4:3",
-      "prompt": "Atmospheric [Atmosphere] Tokyo alleyway at twilight, [Key_Elements], neon holographic reflections on wet asphalt puddles, dense overhead electrical cables, steamy noodle shop awning in distance, cinematic Kodachrome film grain, ultra-sharp optical reflections --ar 4:3",
-      "negativePrompt": "blurry, low contrast, washed out colors, daytime sunlight, CGI 3d look",
+      "image": "/src/assets/images/cyberpunk_tokyo_1790912672961.jpg",
+      "aspectRatio": "16:9",
+      "prompt": "Cinematic 35mm film still of [Location] at twilight during light drizzle, glowing [Color] neon signs reflecting on wet asphalt puddles, steam rising from sewer grates, atmospheric haze, shot on Panavision Millennium DXL2, Kodak Vision3 500T color grading --ar 16:9",
+      "negativePrompt": "blurry, oversaturated cartoon, 3d render, CGI video game graphic, flat lighting",
       "tags": [
         "Cyberpunk",
-        "Neon",
-        "Rain",
         "Tokyo",
-        "Kodachrome",
-        "Atmospheric"
+        "Rain",
+        "Panavision",
+        "Atmospheric",
+        "Neon"
       ],
       "settings": {
         "cfgScale": "3.5",
-        "lighting": "Cyan and magenta neon sign glow reflecting on wet pavement",
-        "lens": "35mm anamorphic cinema lens, f/2.0"
+        "sampler": "Euler A / FlowMatch",
+        "lighting": "Bioluminescent neon signs + diffuse wet asphalt bounce"
       },
       "variables": [
         {
-          "name": "Atmosphere",
-          "token": "[Atmosphere]",
-          "defaultValue": "rain-slicked, neon-drenched",
+          "name": "Location",
+          "token": "[Location]",
+          "defaultValue": "a narrow cobblestone alleyway in Shinjuku",
           "options": [
-            "rain-slicked, neon-drenched",
-            "fog-shrouded midnight",
-            "cybernetic market bustle during heavy downpour"
+            "a narrow cobblestone alleyway in Shinjuku",
+            "an elevated skybridge between brutalist towers",
+            "an underground ramen stall beneath railway arches",
+            "a crowded night market with red paper lanterns"
+          ]
+        },
+        {
+          "name": "Color",
+          "token": "[Color]",
+          "defaultValue": "holographic cyan and amber",
+          "options": [
+            "holographic cyan and amber",
+            "emerald green and deep magenta",
+            "warm tungsten and electric indigo",
+            "subtle monochrome neon with crimson accents"
           ]
         }
       ],
       "seo": {
-        "metaTitle": "Flux.1 Rain-Slicked Tokyo Cyberpunk Prompt",
-        "metaDescription": "Download tested Flux.1 prompt for neon reflections, wet pavement and Tokyo night cinematography.",
-        "focusKeyword": "tokyo cyberpunk prompt"
+        "metaTitle": "Cyberpunk Neo Tokyo 35mm Prompt | Flux.1 & Midjourney",
+        "metaDescription": "Create rain-slicked Tokyo cyberpunk alleyways with anamorphic Panavision lens simulation and Kodak film tones.",
+        "focusKeyword": "cyberpunk prompt flux"
       },
-      "author": "Kenji Takahashi",
+      "author": "Kenji Sato",
       "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
-      "copiesCount": 2190,
-      "likesCount": 894,
-      "viewsCount": 5120,
-      "createdAt": "2026-09-29",
-      "updatedAt": "2026-09-29",
-      "publishedAt": "2026-09-29"
+      "copiesCount": 3120,
+      "likesCount": 789,
+      "viewsCount": 11400,
+      "createdAt": "2026-09-20T14:30:00Z",
+      "updatedAt": "2026-10-01T16:00:00Z",
+      "publishedAt": "2026-09-20T15:00:00Z"
     },
     {
       "id": "post-3",
-      "title": "The Definitive Guide: How to Structure Prompts for Astro SSG Sites",
-      "slug": "guide-structuring-prompts-for-astro-ssg",
+      "title": "Sculpted Haute Couture Linen & Travertine Studio Fashion Editorial",
+      "slug": "sculpted-haute-couture-linen-fashion",
+      "type": "prompt",
+      "status": "published",
+      "featured": true,
+      "excerpt": "Architectural minimalism meets luxury fashion photography with dramatic hard-edged shadow geometry.",
+      "content": "## High Fashion Editorial Prompt Breakdown\n\nThis prompt delivers minimalist European high fashion aesthetics reminiscent of Celine, The Row, and Jil Sander campaigns.\n\n:::tip\n**Styling Tip:** Pair raw earthen materials like brutalist travertine stone or raw concrete with organic organic fibers like heavy raw linen and merino wool.\n:::\n\n---\n\n### Equipment Emulation:\n- **Camera:** Hasselblad H6D-100c Medium Format\n- **Lighting:** Hard directional strobe from 45-degree high angle with snoot grid\n- **Palette:** Sand, bone, warm travertine, raw ecru",
+      "model": "Gemini / Imagen 3",
+      "category": "Fashion & Editorial",
+      "image": "/src/assets/images/fashion_editorial_1790912686462.jpg",
+      "aspectRatio": "3:4",
+      "prompt": "High fashion editorial studio photograph of [Subject] wearing an avant-garde sculpted raw linen architectural blazer, minimalist warm travertine limestone backdrop, dramatic sharp architectural shadow patterns, Hasselblad 100mm medium format clarity, muted organic earth palette, Vogue Italia aesthetics --ar 3:4",
+      "tags": [
+        "Fashion",
+        "Editorial",
+        "Travertine",
+        "Minimalist",
+        "Hasselblad"
+      ],
+      "settings": {
+        "lens": "100mm f/8 Macro, 1/500s",
+        "lighting": "Hard directional key strobe with grid + negative fill"
+      },
+      "variables": [
+        {
+          "name": "Subject",
+          "token": "[Subject]",
+          "defaultValue": "a statue-like editorial fashion model",
+          "options": [
+            "a statue-like editorial fashion model",
+            "a poised dancer striking a dynamic angular pose",
+            "an androgynous model in silhouette against travertine",
+            "a couple in matching tailored raw linen trench coats"
+          ]
+        }
+      ],
+      "seo": {
+        "metaTitle": "Minimalist Haute Couture Fashion Prompt | Gemini & Imagen 3",
+        "metaDescription": "Generate Vogue Italia style high-fashion editorial imagery with travertine stone and architectural shadows.",
+        "focusKeyword": "fashion editorial prompt"
+      },
+      "author": "Elena Vance",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 1940,
+      "likesCount": 512,
+      "viewsCount": 6800,
+      "createdAt": "2026-09-22T08:00:00Z",
+      "updatedAt": "2026-10-01T12:00:00Z",
+      "publishedAt": "2026-09-22T09:00:00Z"
+    },
+    {
+      "id": "post-4",
+      "title": "Surreal Floating Basalt Pillars & Aurora Borealis Alpine Glacial Lake",
+      "slug": "surreal-floating-basalt-pillars-aurora",
+      "type": "prompt",
+      "status": "published",
+      "featured": false,
+      "excerpt": "Surreal National Geographic landscape with mossy floating basalt monoliths and vibrant twilight aurora.",
+      "content": "## Environmental Lighting & Volumetric Depth\n\nAchieving realism in fantasy landscape generation requires grounding surreal structures with physical atmospheric phenomena. This prompt incorporates morning alpine mist, mirror-calm water reflection physics, and natural Icelandic moss textures.\n\n:::info\n**Aspect Ratio Recommendation:** Use `--ar 16:9` or `--ar 4:3` for maximum environmental panoramic breadth.\n:::",
+      "model": "ChatGPT / DALL·E 3",
+      "category": "Fantasy & Surreal",
+      "image": "/src/assets/images/fantasy_landscape_1790912697089.jpg",
+      "aspectRatio": "4:3",
+      "prompt": "Surreal majestic landscape of [Feature] floating above a mirror-calm glacial alpine lake at twilight, vibrant ethereal aurora borealis rippling across the violet sky, dramatic atmospheric mist, 24mm wide angle perspective, National Geographic fine art photography --ar 4:3",
+      "tags": [
+        "Landscape",
+        "Surreal",
+        "Aurora",
+        "Basalt",
+        "Alpine Lake"
+      ],
+      "variables": [
+        {
+          "name": "Feature",
+          "token": "[Feature]",
+          "defaultValue": "ancient mossy hexagonal basalt pillars",
+          "options": [
+            "ancient mossy hexagonal basalt pillars",
+            "crystalline geometric monoliths glowing with soft cyan light",
+            "floating bonsai islands connected by misty waterfalls",
+            "ancient weathered stone arches overlooking glacial fjords"
+          ]
+        }
+      ],
+      "seo": {
+        "metaTitle": "Surreal Alpine Aurora Landscape Prompt | DALL-E 3 & Midjourney",
+        "metaDescription": "Create breathtaking fantasy nature photography with floating basalt pillars and northern lights.",
+        "focusKeyword": "surreal landscape prompt"
+      },
+      "author": "Elena Vance",
+      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 2200,
+      "likesCount": 610,
+      "viewsCount": 7900,
+      "createdAt": "2026-09-24T11:00:00Z",
+      "updatedAt": "2026-10-01T14:15:00Z",
+      "publishedAt": "2026-09-24T12:00:00Z"
+    },
+    {
+      "id": "post-5",
+      "title": "The Ultimate Guide to Astro SSG, Content Collections & Cloudflare Auto-Deploy",
+      "slug": "astro-ssg-content-collections-guide",
       "type": "article",
       "status": "published",
       "featured": true,
-      "excerpt": "Learn how to use Astro Content Collections and Markdown frontmatter to build ultra-fast, zero-cost AI prompt libraries.",
-      "content": "## Why Astro is the Ultimate Framework for Prompt Directories\n\nWhen you run an AI prompt directory or photography portfolio, page speed is directly tied to user retention. Traditional server-rendered WordPress sites suffer from database queries, PHP execution overhead, and expensive hosting tiers.\n\n:::info\n**Astro SSG Speed Advantage:** Astro builds all prompt cards and articles as pure static HTML during deployment. Zero JavaScript execution on initial page render gives you an instant 100/100 Google Lighthouse score.\n:::\n\n---\n\n### 1. Zero JavaScript by Default\nAstro renders HTML at build time (SSG). Prompts, images, and camera metadata are converted to pristine static HTML, resulting in 100/100 Google Lighthouse scores.\n\n### 2. Markdown Content Collections\nInstead of storing prompts in an SQL database, Astro Content Collections store each prompt as a clean `.md` or `.json` file:\n\n```typescript\n// src/content/config.ts\nimport { defineCollection, z } from 'astro:content';\n\nconst prompts = defineCollection({\n  type: 'content',\n  schema: z.object({\n    title: z.string(),\n    model: z.string(),\n    aspectRatio: z.string(),\n    tags: z.array(z.string()),\n    likes: z.number().default(0),\n  }),\n});\n```\n\n---\n\n### 3. Cloudflare Pages + Webhook Deployments\nWhenever you hit **\"Publish\"** in this WordPress-grade admin panel, a POST request is sent to your Cloudflare Pages Deploy Hook. Cloudflare pulls the latest commit and rebuilds the static HTML in under 20 seconds for $0/month.\n\n:::tip\n**Cost Breakdown:**\n- Cloudflare Pages: $0 / month (Unlimited Bandwidth, Global CDN)\n- GitHub Storage: $0 / month (Public/Private code repository)\n- Sveltia / WP-Admin: $0 / month (Client-side Git CMS)\n- **Total Monthly Expense: $0.00**\n:::",
+      "excerpt": "Learn how to build, optimize, and deploy a zero-cost AI prompt directory on Cloudflare Pages using Astro and Sveltia CMS.",
+      "content": "## Why Astro is the #1 Choice for Modern AI Directories\n\nAstro delivers **zero-JavaScript by default**, rendering 100% pure HTML and CSS to the edge. When building content-heavy sites like AI prompt libraries or photo archives, Astro scores a perfect 100/100 on Google Core Web Vitals.\n\n:::tip\n**Performance Advantage:** Astro generates static pages at build time. When users browse prompts, pages load in under **50 milliseconds** worldwide via Cloudflare CDN.\n:::\n\n---\n\n### Step-by-Step Architecture:\n\n1. **Astro Content Collections:** Schema-validated TypeScript Markdown files in `src/content/posts/*.md`.\n2. **Cloudflare Deploy Hooks:** Triggered automatically whenever you click \"Publish\" in the CMS.\n3. **Sveltia / WP-Admin GUI:** Light-speed browser-based editing with real-time markdown and visual blocks.\n\n```typescript\n// src/content/config.ts - Type-Safe Astro Content Collection\nimport { defineCollection, z } from 'astro:content';\n\nconst postsCollection = defineCollection({\n  type: 'content',\n  schema: z.object({\n    title: z.string(),\n    model: z.string().optional(),\n    aspectRatio: z.string().optional(),\n    category: z.string(),\n    status: z.enum(['draft', 'published']),\n    publishedAt: z.date(),\n  }),\n});\n\nexport const collections = { posts: postsCollection };\n```\n\n---\n\n### Watch Video Tutorial:\nhttps://www.youtube.com/watch?v=ScMzIvxBSi4\n\n---\n\n### Frequently Asked Questions:\n:::faq\nQ: How much does Cloudflare Pages cost for 1,000,000 monthly visitors?\nA: Cloudflare Pages is 100% free with unlimited bandwidth and 500 free monthly builds.\nQ: Can I add custom domain names?\nA: Yes, Cloudflare allows you to connect any custom domain with automatic SSL certificates for free.\n:::",
       "category": "Tutorials & Guides",
-      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
       "tags": [
         "Astro",
-        "Cloudflare Pages",
-        "Webhooks",
-        "Static Site",
+        "Cloudflare",
+        "SSG",
+        "Web Development",
         "Tutorial"
       ],
       "seo": {
-        "metaTitle": "Build a Free AI Prompt Library with Astro & Cloudflare Pages",
-        "metaDescription": "Step-by-step masterclass on deploying an Astro SSG prompt site with WordPress-grade admin and auto-deploy webhooks.",
-        "focusKeyword": "astro prompt library"
+        "metaTitle": "Complete Astro SSG & Cloudflare Pages Auto-Deploy Masterclass",
+        "metaDescription": "Master Astro Content Collections and Cloudflare Pages auto-deploy webhooks for zero-cost static web applications.",
+        "focusKeyword": "astro cloudflare auto deploy"
       },
-      "author": "Elena Rostova",
-      "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
-      "copiesCount": 380,
-      "likesCount": 610,
-      "viewsCount": 4280,
-      "createdAt": "2026-09-30",
-      "updatedAt": "2026-09-30",
-      "publishedAt": "2026-09-30"
+      "author": "Kenji Sato",
+      "authorAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+      "copiesCount": 890,
+      "likesCount": 340,
+      "viewsCount": 4200,
+      "createdAt": "2026-09-25T16:00:00Z",
+      "updatedAt": "2026-10-01T10:00:00Z",
+      "publishedAt": "2026-09-25T17:00:00Z"
+    },
+    {
+      "id": "post-6",
+      "title": "Draft: Hyper-Realistic Macro Studio Photography of Dewdrops on Orchid Petals",
+      "slug": "macro-studio-orchid-dewdrops",
+      "type": "prompt",
+      "status": "draft",
+      "featured": false,
+      "excerpt": "Extreme macro optical focus stacking prompt with prism rainbow reflections in water droplets.",
+      "content": "## Macro Optical Formula\n\nTesting optical depth of field with 100mm macro lenses and reverse-ring focus stacking.\n\n:::warning\n**Draft Note:** Need to verify negative prompt tokens for chromatic aberration artifacts before publishing to live production.\n:::",
+      "model": "Midjourney v6",
+      "category": "Realistic",
+      "image": "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=80",
+      "aspectRatio": "1:1",
+      "prompt": "Extreme 100mm macro studio photograph of crystal clear water dewdrops resting on velvety [Flower] petal, microscopic refraction of golden sunlight inside droplets, focus-stacked tack-sharp fidelity, Canon EOS R5 --ar 1:1",
+      "tags": [
+        "Macro",
+        "Dewdrops",
+        "Studio",
+        "Orchid"
+      ],
+      "variables": [
+        {
+          "name": "Flower",
+          "token": "[Flower]",
+          "defaultValue": "purple phalaenopsis orchid",
+          "options": [
+            "purple phalaenopsis orchid",
+            "black baccara rose",
+            "wild lotus blossom"
+          ]
+        }
+      ],
+      "seo": {
+        "metaTitle": "Macro Orchid Dewdrops Prompt",
+        "metaDescription": "Extreme macro photography prompt.",
+        "focusKeyword": "macro prompt"
+      },
+      "author": "Elena Vance",
+      "copiesCount": 0,
+      "likesCount": 12,
+      "viewsCount": 45,
+      "createdAt": "2026-09-28T09:00:00Z",
+      "updatedAt": "2026-09-28T09:00:00Z"
     }
   ],
   "pages": [
@@ -224,67 +380,67 @@
   ],
   "categories": [
     {
-      "id": "cat-all",
+      "id": "all",
       "name": "All Posts",
       "slug": "all",
       "description": "Explore all AI prompts, tutorials & guides"
     },
     {
-      "id": "cat-portraits",
+      "id": "portraits",
       "name": "Portraits",
       "slug": "portraits",
       "description": "Studio, candid, and character portrait photography"
     },
     {
-      "id": "cat-cinematic",
+      "id": "cinematic",
       "name": "Cinematic",
       "slug": "cinematic",
       "description": "Film stills, 35mm panavision, and movie lighting"
     },
     {
-      "id": "cat-realistic",
+      "id": "realistic",
       "name": "Realistic",
       "slug": "realistic",
       "description": "Hyper-detailed realistic documentary & editorial scenes"
     },
     {
-      "id": "cat-fashion",
+      "id": "fashion",
       "name": "Fashion & Editorial",
       "slug": "fashion",
       "description": "Vogue editorial, sculpted garments, haute couture"
     },
     {
-      "id": "cat-cyberpunk",
+      "id": "cyberpunk",
       "name": "Cyberpunk & Sci-Fi",
       "slug": "cyberpunk",
       "description": "Futuristic megacities, neon rain, holographic reflections"
     },
     {
-      "id": "cat-fantasy",
+      "id": "fantasy",
       "name": "Fantasy & Surreal",
       "slug": "fantasy",
       "description": "Dreamscapes, mythical biomes, floating islands"
     },
     {
-      "id": "cat-product",
+      "id": "product",
       "name": "Product & Commercial",
       "slug": "product",
       "description": "Studio commercial lighting, cosmetics, luxury goods"
     },
     {
-      "id": "cat-tutorials",
+      "id": "tutorials",
       "name": "Tutorials & Guides",
       "slug": "tutorials",
       "description": "In-depth Astro, Midjourney & Flux.1 prompt guides"
     },
     {
-      "id": "cat-anime",
+      "id": "anime",
       "name": "Anime & Manga",
       "slug": "anime",
       "description": "Makoto Shinkai aesthetic, Studio Ghibli, modern anime keyframes"
     },
     {
-      "id": "cat-architecture",
+      "id": "architecture",
       "name": "Architecture",
       "slug": "architecture",
       "description": "Brutalist concrete, modern minimalist villas, urban design"
@@ -458,8 +614,44 @@
     "siteTitle": "PromptPlum AI",
     "tagline": "Astro-Powered AI Photo Prompts & Photography Masterclasses",
     "brandColor": "#8b5cf6",
-    "headerNotice": "⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled",
+    "logoUrl": "",
+    "faviconUrl": "",
+    "headerNotice": "⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled · Gutenberg CMS Active",
     "headerNoticeLink": "#deploy",
+    "headerNoticeEnabled": true,
+    "containerMaxWidth": "max-w-7xl",
+    "headerMenuItems": [
+      {
+        "id": "m-1",
+        "label": "Explore Prompts",
+        "url": "#explore"
+      },
+      {
+        "id": "m-2",
+        "label": "Masterclasses",
+        "url": "#articles"
+      },
+      {
+        "id": "m-3",
+        "label": "Prompt Studio",
+        "url": "#generator"
+      },
+      {
+        "id": "m-4",
+        "label": "Favorites",
+        "url": "#favorites"
+      },
+      {
+        "id": "m-5",
+        "label": "About",
+        "url": "#about"
+      },
+      {
+        "id": "m-6",
+        "label": "Free Cloudflare Setup",
+        "url": "#deploy"
+      }
+    ],
     "hero": {
       "kicker": "Curated AI Photo Editing & Generative Prompts · Tested & Verified",
       "title": "PromptPlum AI Prompts Library",
@@ -541,6 +733,14 @@
         {
           "label": "Saved Favorites",
           "url": "#favorites"
+        },
+        {
+          "label": "About Us",
+          "url": "#about"
+        },
+        {
+          "label": "Prompt Guidelines",
+          "url": "#guidelines"
         }
       ],
       "socialTwitter": "https://twitter.com",

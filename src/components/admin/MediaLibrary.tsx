@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { usePrompts } from '../../context/PromptContext';
 import { MediaItem } from '../../types/prompt';
 import { 
@@ -10,7 +10,10 @@ import {
   ExternalLink, 
   Plus, 
   Search,
-  Filter
+  Filter,
+  UploadCloud,
+  CheckCircle2,
+  FolderOpen
 } from 'lucide-react';
 
 export const MediaLibrary: React.FC = () => {
@@ -18,13 +21,52 @@ export const MediaLibrary: React.FC = () => {
 
   const [search, setSearch] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  // New Media Form state
+  // File input ref for device upload
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // New Media Form state (for manual URL)
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [dimensions, setDimensions] = useState('1536 x 2048');
   const [size, setSize] = useState('1.2 MB');
+
+  const handleFilesUpload = (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target?.result as string;
+        addMedia({
+          name: file.name,
+          url: dataUrl,
+          size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+          dimensions: 'Original',
+          mimeType: file.type || 'image/jpeg'
+        });
+        showToast(`Uploaded "${file.name}" to Media Library`);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    handleFilesUpload(e.dataTransfer.files);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
 
   const handleAddMedia = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,17 +108,64 @@ export const MediaLibrary: React.FC = () => {
             <span>WordPress Media Library</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Manage photography assets, prompt previews, and responsive images.
+            Upload images from your device, manage prompt photography assets, and get direct URLs.
           </p>
         </div>
 
-        <button
-          onClick={() => setIsAddOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-violet-600 hover:bg-violet-500 text-white shadow-md shadow-violet-900/30 transition-colors cursor-pointer"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Add Media File</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept="image/*"
+            multiple
+            onChange={(e) => {
+              handleFilesUpload(e.target.files);
+              e.target.value = '';
+            }}
+            className="hidden"
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-violet-600 hover:bg-violet-500 text-white shadow-md shadow-violet-900/30 transition-colors cursor-pointer"
+          >
+            <Upload className="w-4 h-4" />
+            <span>Upload from Device</span>
+          </button>
+          <button
+            onClick={() => setIsAddOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-[#222638] hover:bg-[#2c324a] text-slate-200 border border-[#2e334d] transition-colors cursor-pointer"
+          >
+            <Plus className="w-3.5 h-3.5 text-slate-400" />
+            <span>Add by URL</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Drag & Drop Upload Zone */}
+      <div
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onClick={() => fileInputRef.current?.click()}
+        className={`border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all cursor-pointer ${
+          isDragging 
+            ? 'border-violet-500 bg-violet-950/30 ring-4 ring-violet-500/20 scale-[0.99]' 
+            : 'border-[#282d42] bg-[#11131e] hover:border-violet-600/60 hover:bg-[#151826]'
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <div className="w-12 h-12 rounded-2xl bg-violet-600/20 text-violet-400 flex items-center justify-center shadow-inner">
+            <UploadCloud className="w-6 h-6" />
+          </div>
+          <div className="space-y-0.5">
+            <p className="text-sm font-bold text-white">
+              Drop images here or <span className="text-violet-400 underline decoration-violet-500">browse files</span>
+            </p>
+            <p className="text-xs text-slate-400">
+              Supports JPG, PNG, WebP, GIF up to 50MB · Uploads directly to your local media store
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Add Media Modal */}

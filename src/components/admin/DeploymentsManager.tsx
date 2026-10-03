@@ -118,7 +118,7 @@ export const DeploymentsManager: React.FC = () => {
     setPushProgressStep('Scanning all AI Studio workspace files and uploading to GitHub...');
 
     try {
-      // 1. Primary: Server-side complete workspace push (pushes EVERY file from AI Studio!)
+      // 1. Primary: Server-side complete workspace push (pushes EVERY file from AI Studio + all newly published markdown posts!)
       const res = await fetch('/api/github/push-all', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -126,7 +126,10 @@ export const DeploymentsManager: React.FC = () => {
           token: githubToken,
           repo: githubRepo,
           branch: githubBranch || 'main',
-          commitMessage
+          commitMessage,
+          posts,
+          categories,
+          customizerSettings
         })
       });
 

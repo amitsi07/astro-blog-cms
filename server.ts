@@ -7,6 +7,88 @@ import { getDatabase, saveDatabase, DBDatabase } from './src/server/db';
 const PORT = Number(process.env.PORT) || 3000;
 const isProd = process.env.NODE_ENV === 'production';
 
+function postToMarkdown(post: any): string {
+  const frontmatterObj: Record<string, any> = {
+    id: post.id || `post-${Date.now()}`,
+    title: post.title || 'Untitled Post',
+    slug: post.slug || (post.title ? post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : `post-${Date.now()}`),
+    type: post.type || 'prompt',
+    status: post.status || 'published',
+    featured: Boolean(post.featured),
+    excerpt: post.excerpt || '',
+    model: post.model || 'Midjourney v6',
+    category: post.category || 'Portraits',
+    image: post.image || '/images/cinematic_portrait_1790912658842.jpg',
+    aspectRatio: post.aspectRatio || '3:4',
+    prompt: post.prompt || '',
+    negativePrompt: post.negativePrompt || '',
+    tags: Array.isArray(post.tags) ? post.tags : [],
+    author: post.author || 'Elena Rostova',
+    publishedAt: post.publishedAt || post.createdAt || new Date().toISOString().split('T')[0],
+    createdAt: post.createdAt || new Date().toISOString().split('T')[0],
+    updatedAt: post.updatedAt || new Date().toISOString().split('T')[0],
+  };
+
+  if (post.settings) frontmatterObj.settings = post.settings;
+  if (post.variables) frontmatterObj.variables = post.variables;
+  if (post.seo) frontmatterObj.seo = post.seo;
+
+  const yamlLines = ['---'];
+  for (const [key, val] of Object.entries(frontmatterObj)) {
+    if (val === undefined || val === null) continue;
+    if (Array.isArray(val)) {
+      if (val.length === 0) {
+        yamlLines.push(`${key}: []`);
+      } else if (typeof val[0] === 'string') {
+        yamlLines.push(`${key}:`);
+        for (const item of val) {
+          yamlLines.push(`  - ${JSON.stringify(item)}`);
+        }
+      } else {
+        yamlLines.push(`${key}: ${JSON.stringify(val)}`);
+      }
+    } else if (typeof val === 'object') {
+      yamlLines.push(`${key}: ${JSON.stringify(val)}`);
+    } else if (typeof val === 'string') {
+      yamlLines.push(`${key}: ${JSON.stringify(val)}`);
+    } else {
+      yamlLines.push(`${key}: ${val}`);
+    }
+  }
+  yamlLines.push('---');
+  yamlLines.push('');
+  yamlLines.push(post.content || post.prompt || '');
+  yamlLines.push('');
+  return yamlLines.join('\n');
+}
+
+async function syncPostToDisk(post: any) {
+  try {
+    const fs = await import('fs');
+    const postsDir = path.resolve(process.cwd(), 'src', 'content', 'posts');
+    if (!fs.existsSync(postsDir)) {
+      fs.mkdirSync(postsDir, { recursive: true });
+    }
+    const slug = post.slug || `post-${Date.now()}`;
+    const filePath = path.join(postsDir, `${slug}.md`);
+    fs.writeFileSync(filePath, postToMarkdown(post), 'utf8');
+  } catch (err) {
+    console.error('[Astro CMS] Failed to sync post to disk:', err);
+  }
+}
+
+async function removePostFromDisk(slug: string) {
+  try {
+    const fs = await import('fs');
+    const filePath = path.resolve(process.cwd(), 'src', 'content', 'posts', `${slug}.md`);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  } catch (err) {
+    console.error('[Astro CMS] Failed to remove post from disk:', err);
+  }
+}
+
 async function startServer() {
   const app = express();
 
@@ -86,10 +168,10 @@ async function startServer() {
     res.json({ success: true, post });
   });
 
-  app.post('/api/posts', (req, res) => {
+  app.post('/api/posts', async (req, res) => {
     const db = getDatabase();
     const newPostData = req.body;
-    const newId = `post-${Date.now()}`;
+    const newId = newPostData.id || `post-${Date.now()}`;
     const dateStr = new Date().toISOString().split('T')[0];
 
     const newPost = {
@@ -117,20 +199,26 @@ async function startServer() {
       },
       author: newPostData.author || 'Elena Rostova',
       authorAvatar: newPostData.authorAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
-      copiesCount: 0,
-      likesCount: 0,
-      viewsCount: 1,
-      createdAt: dateStr,
+      copiesCount: newPostData.copiesCount || 0,
+      likesCount: newPostData.likesCount || 0,
+      viewsCount: newPostData.viewsCount || 1,
+      createdAt: newPostData.createdAt || dateStr,
       updatedAt: dateStr,
-      publishedAt: newPostData.status === 'published' ? dateStr : undefined
+      publishedAt: newPostData.status === 'published' ? (newPostData.publishedAt || dateStr) : undefined
     };
 
-    db.posts.unshift(newPost);
+    const existingIndex = db.posts.findIndex(p => p.id === newPost.id || p.slug === newPost.slug);
+    if (existingIndex >= 0) {
+      db.posts[existingIndex] = { ...db.posts[existingIndex], ...newPost };
+    } else {
+      db.posts.unshift(newPost);
+    }
     saveDatabase(db);
+    await syncPostToDisk(newPost);
     res.json({ success: true, post: newPost });
   });
 
-  app.put('/api/posts/:id', (req, res) => {
+  app.put('/api/posts/:id', async (req, res) => {
     const db = getDatabase();
     const { id } = req.params;
     const index = db.posts.findIndex(p => p.id === id);
@@ -150,12 +238,17 @@ async function startServer() {
 
     db.posts[index] = updated;
     saveDatabase(db);
+    await syncPostToDisk(updated);
     res.json({ success: true, post: updated });
   });
 
-  app.delete('/api/posts/:id', (req, res) => {
+  app.delete('/api/posts/:id', async (req, res) => {
     const db = getDatabase();
     const { id } = req.params;
+    const target = db.posts.find(p => p.id === id);
+    if (target) {
+      await removePostFromDisk(target.slug);
+    }
     db.posts = db.posts.filter(p => p.id !== id);
     saveDatabase(db);
     res.json({ success: true, message: 'Post deleted' });
@@ -538,6 +631,18 @@ async function startServer() {
       }
       const refData = await refRes.json();
       const latestCommitSha = refData.object.sha;
+
+      // 1.5. If client provided updated posts or database items, sync them to disk first
+      if (Array.isArray(req.body.posts) && req.body.posts.length > 0) {
+        const db = getDatabase();
+        db.posts = req.body.posts;
+        if (req.body.categories) db.categories = req.body.categories;
+        if (req.body.customizerSettings) db.customizer = req.body.customizerSettings;
+        saveDatabase(db);
+        for (const p of req.body.posts) {
+          await syncPostToDisk(p);
+        }
+      }
 
       // 2. Read ALL actual workspace files from filesystem
       const fs = await import('fs');
