@@ -4,25 +4,28 @@ title: "Editorial 85mm Golden Hour Portrait with Natural Freckles"
 slug: "editorial-85mm-golden-hour-portrait"
 type: "prompt"
 status: "published"
-featured: false
+featured: true
 excerpt: "Award-winning Hasselblad H6D-100c studio portrait prompt with customizable lighting angles and skin texture controls."
 model: "Midjourney v6"
 category: "Portraits"
-image: "/images/cinematic_portrait_1790912658842.jpg"
+image: "/src/assets/images/cinematic_portrait_1790912658842.jpg"
 aspectRatio: "3:4"
 prompt: "Cinematic 85mm portrait of [Subject] with natural hyper-detailed skin texture, soft dramatic side [Lighting], muted emerald and warm amber tones, shallow depth of field, award-winning editorial Vogue photography, shot on Hasselblad H6D-100c --ar 3:4 --v 6.0 --style raw"
 negativePrompt: "over-smoothed skin, plastic look, cartoon, blur, bad eyes, extra fingers, deformed face, high saturation"
-tags: ["85mm","Golden Hour","Editorial","Hasselblad","Natural Skin","Raw Style"]
+tags:
+  - "85mm"
+  - "Golden Hour"
+  - "Editorial"
+  - "Hasselblad"
+  - "Natural Skin"
+  - "Raw Style"
+author: "Elena Vance"
+publishedAt: "2026-09-18T12:00:00Z"
+createdAt: "2026-09-18T10:00:00Z"
+updatedAt: "2026-10-01T15:20:00Z"
 settings: {"stylize":"250","lighting":"Low-angle golden hour rim light + soft fill reflector","lens":"85mm f/1.4 lens, 1/250s, ISO 100"}
 variables: [{"name":"Subject","token":"[Subject]","defaultValue":"a serene woman with subtle freckles and hazel eyes","options":["a serene woman with subtle freckles and hazel eyes","an elder craftsman with weathered hands and silver beard","a young jazz trumpeter in a bespoke charcoal blazer","an athlete with intense gaze catching rainwater droplets"]},{"name":"Lighting","token":"[Lighting]","defaultValue":"golden hour side lighting with warm amber rim highlights","options":["golden hour side lighting with warm amber rim highlights","diffused north-window studio daylight with gentle falloff","chiaroscuro candlelit illumination with deep rich shadows","soft overcast daylight with silver bounce board fill"]}]
 seo: {"metaTitle":"Editorial 85mm Portrait Prompt for Midjourney & Flux.1","metaDescription":"Generate studio quality 85mm portrait photography with real skin textures using this tested Midjourney v6 prompt.","focusKeyword":"85mm portrait midjourney prompt"}
-author: "Elena Vance"
-copiesCount: 2840
-likesCount: 642
-viewsCount: 9120
-publishedAt: "2026-10-03"
-createdAt: "2026-09-18T10:00:00Z"
-updatedAt: "2026-10-03"
 ---
 
 ## The Concept & Lighting Architecture
