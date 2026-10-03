@@ -17,7 +17,6 @@ settings: {"cfgScale":"3.5","sampler":"Euler A / FlowMatch","lighting":"Biolumin
 variables: [{"name":"Location","token":"[Location]","defaultValue":"a narrow cobblestone alleyway in Shinjuku","options":["a narrow cobblestone alleyway in Shinjuku","an elevated skybridge between brutalist towers","an underground ramen stall beneath railway arches","a crowded night market with red paper lanterns"]},{"name":"Color","token":"[Color]","defaultValue":"holographic cyan and amber","options":["holographic cyan and amber","emerald green and deep magenta","warm tungsten and electric indigo","subtle monochrome neon with crimson accents"]}]
 seo: {"metaTitle":"Cyberpunk Neo Tokyo 35mm Prompt | Flux.1 & Midjourney","metaDescription":"Create rain-slicked Tokyo cyberpunk alleyways with anamorphic Panavision lens simulation and Kodak film tones.","focusKeyword":"cyberpunk prompt flux"}
 author: "Kenji Sato"
-authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
 copiesCount: 3120
 likesCount: 789
 viewsCount: 11400

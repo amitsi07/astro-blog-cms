@@ -2,16 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const publishedPosts = await getCollection('posts', ({ data }) => data.status === 'published');
-const prompts = publishedPosts.filter(p => p.data.type === 'prompt');
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const prompts = allPosts.filter(p => p.data.type === 'prompt');
 const featuredPrompts = prompts.filter(p => p.data.featured).slice(0, 3);
+const categories = [{"id":"all","name":"All Posts","slug":"all","description":"Explore all AI prompts, tutorials & guides"},{"id":"portraits","name":"Portraits","slug":"portraits","description":"Studio, candid, and character portrait photography"},{"id":"cinematic","name":"Cinematic","slug":"cinematic","description":"Film stills, 35mm panavision, and movie lighting"},{"id":"realistic","name":"Realistic","slug":"realistic","description":"Hyper-detailed realistic documentary & editorial scenes"},{"id":"fashion","name":"Fashion & Editorial","slug":"fashion","description":"Vogue editorial, sculpted garments, haute couture"},{"id":"cyberpunk","name":"Cyberpunk & Sci-Fi","slug":"cyberpunk","description":"Futuristic megacities, neon rain, holographic reflections"},{"id":"fantasy","name":"Fantasy & Surreal","slug":"fantasy","description":"Dreamscapes, mythical biomes, floating islands"},{"id":"product","name":"Product & Commercial","slug":"product","description":"Studio commercial lighting, cosmetics, luxury goods"},{"id":"tutorials","name":"Tutorials & Guides","slug":"tutorials","description":"In-depth Astro, Midjourney & Flux.1 prompt guides"},{"id":"anime","name":"Anime & Manga","slug":"anime","description":"Makoto Shinkai aesthetic, Studio Ghibli, modern anime keyframes"},{"id":"architecture","name":"Architecture","slug":"architecture","description":"Brutalist concrete, modern minimalist villas, urban design"}];
 ---
 
 <Layout title="PromptPlum AI – Astro-Powered AI Photo Prompts & Photography Masterclasses">
   <!-- Hero Section -->
-  <section class="relative overflow-hidden pt-16 pb-12 border-b border-[#1b1e2a] bg-gradient-to-b from-[#10121a] to-[#0c0d12] text-center">
+  <section class="relative overflow-hidden pt-16 pb-12 border-b border-[#1b1e2a] bg-gradient-to-b from-[#10121a] via-[#0c0d12] to-[#0c0d12] text-center">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="inline-flex items-center gap-2 text-xs font-semibold text-violet-400 mb-3">
+      <div class="inline-flex items-center gap-2 text-xs font-semibold text-violet-400 mb-3 tracking-wide">
         <span>✦</span>
         <span>Curated AI Photo Editing & Generative Prompts · Tested & Verified</span>
       </div>
@@ -22,53 +23,194 @@ const featuredPrompts = prompts.filter(p => p.data.featured).slice(0, 3);
         Discover, customize, and copy tested AI photography prompts for Midjourney, Gemini, ChatGPT, and Flux. 100% free Cloudflare Pages + Astro SSG deployment.
       </p>
 
+      <!-- Instant Live Search Bar -->
+      <div class="max-w-2xl mx-auto relative mb-6">
+        <input
+          id="promptSearchInput"
+          type="text"
+          placeholder="Search prompts, cameras, lighting, keywords..."
+          class="w-full bg-[#151722] border border-[#2b2f42] rounded-xl px-5 py-3.5 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 shadow-xl"
+        />
+      </div>
+
+      <!-- AI Model Filter Pills -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 max-w-3xl mx-auto mb-4" id="modelFiltersContainer">
+        <button data-model="All" class="model-filter-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-violet-600 text-white transition-all">All Engines</button>
+        <button data-model="Midjourney v6" class="model-filter-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-[#151722] text-slate-400 hover:text-white border border-[#232738] transition-all">Midjourney v6</button>
+        <button data-model="Flux.1" class="model-filter-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-[#151722] text-slate-400 hover:text-white border border-[#232738] transition-all">Flux.1</button>
+        <button data-model="Gemini / Imagen 3" class="model-filter-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-[#151722] text-slate-400 hover:text-white border border-[#232738] transition-all">Gemini</button>
+        <button data-model="ChatGPT / DALL·E 3" class="model-filter-btn px-3 py-1.5 text-xs font-medium rounded-lg bg-[#151722] text-slate-400 hover:text-white border border-[#232738] transition-all">ChatGPT / DALL-E</button>
+      </div>
+
       <!-- Proof stats -->
-      <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-400 font-mono">
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-400 font-mono pt-4 border-t border-[#181a24]">
         <span class="text-white font-semibold">{prompts.length} Verified Prompts</span>
         <span>·</span>
-        <span>Astro Content Collections</span>
+        <span>Pure Astro Content Collections</span>
         <span>·</span>
-        <span class="text-emerald-400">Cloudflare Edge SSG</span>
+        <span class="text-emerald-400">Cloudflare Pages Edge</span>
       </div>
     </div>
   </section>
 
+  <!-- Category Filter Bar -->
+  <div class="border-b border-[#1c1f2c] bg-[#0c0d12]/90 backdrop-blur-sm sticky top-16 z-30 py-3">
+    <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 overflow-x-auto" id="categoryFiltersContainer">
+      <button data-category="all" class="cat-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap bg-violet-600 text-white">All Posts</button>
+      {categories.filter(c => c.id !== 'all').map((cat) => (
+        <button data-category={cat.name} class="cat-filter-btn px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap bg-[#131520] text-slate-400 hover:text-white border border-[#212435]">{cat.name}</button>
+      ))}
+    </div>
+  </div>
+
   <!-- Prompts Grid -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#1f222e]">
-      <div>
-        <h2 class="text-2xl font-bold text-white tracking-tight">Curated AI Image Prompts</h2>
-        <p class="text-xs text-slate-400 mt-1">Ready to copy and paste into Midjourney, Flux, Gemini, and ChatGPT</p>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    <div class="flex items-center justify-between mb-8 pb-3 border-b border-[#1f222e]">
+      <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+        <span id="promptCountLabel" class="text-white font-bold text-sm">{prompts.length} Prompts</span>
+        <span>·</span>
+        <span>1-Click Copy Enabled</span>
       </div>
-      <span class="font-mono text-xs px-2.5 py-1 rounded bg-[#161824] text-violet-300 border border-[#242738]">
-        {prompts.length} Prompts
-      </span>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="promptsGrid">
       {prompts.map((post) => (
-        <a href={`/posts/${post.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500/60 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col shadow-lg">
-          <div class="relative aspect-[3/4] overflow-hidden bg-black/40">
+        <div
+          class="prompt-card group bg-[#131520] border border-[#23273a] hover:border-violet-500/60 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-xl"
+          data-title={post.data.title.toLowerCase()}
+          data-prompt={(post.data.prompt || '').toLowerCase()}
+          data-category={post.data.category}
+          data-model={post.data.model}
+        >
+          <a href={`/posts/${post.data.slug}`} class="block relative aspect-[3/4] overflow-hidden bg-black/40">
             <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-[#131520] via-transparent to-transparent opacity-80" />
-            <div class="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[11px] font-mono text-violet-300 border border-white/10">
+            <div class="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[11px] font-mono text-violet-300 border border-white/10">
               {post.data.model}
             </div>
-          </div>
-          <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
-            <div>
-              <span class="text-[11px] text-violet-400 font-semibold">{post.data.category}</span>
-              <h3 class="text-sm font-bold text-white group-hover:text-violet-300 transition-colors line-clamp-2 mt-0.5">
+            <div class="absolute bottom-3 left-3 right-3 text-xs text-slate-300 font-mono flex items-center justify-between">
+              <span>{post.data.category}</span>
+              <span>{post.data.aspectRatio}</span>
+            </div>
+          </a>
+
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+            <a href={`/posts/${post.data.slug}`}>
+              <h3 class="text-sm font-bold text-white group-hover:text-violet-300 transition-colors line-clamp-2">
                 {post.data.title}
               </h3>
-            </div>
-            <div class="pt-2 border-t border-[#1f222e] flex items-center justify-between text-xs text-slate-400">
-              <span class="font-mono">{post.data.aspectRatio}</span>
-              <span class="text-violet-400 font-semibold group-hover:underline">View Formula &rarr;</span>
+              <p class="text-xs text-slate-400 line-clamp-2 mt-1">
+                {post.data.excerpt}
+              </p>
+            </a>
+
+            <div class="pt-2 border-t border-[#1f222e] flex items-center gap-2">
+              <button
+                type="button"
+                class="copy-prompt-btn flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-[#1a1c2a] hover:bg-violet-600 text-slate-200 hover:text-white border border-[#2d3148] transition-colors cursor-pointer text-center"
+                data-prompt={post.data.prompt}
+              >
+                Copy Prompt
+              </button>
+              <a
+                href={`/posts/${post.data.slug}`}
+                class="p-1.5 rounded-lg bg-[#1a1c2a] hover:bg-[#25283d] text-violet-300 transition-colors"
+                title="View Full Post"
+              >
+                &rarr;
+              </a>
             </div>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   </main>
+
+  <!-- Interactive Client-side Script (Runs 100% in browser with no external React runtime needed!) -->
+  <script is:inline>
+    // 1. Live Instant Search & Filter
+    const searchInput = document.getElementById('promptSearchInput');
+    const cards = document.querySelectorAll('.prompt-card');
+    const countLabel = document.getElementById('promptCountLabel');
+    let currentCategory = 'all';
+    let currentModel = 'All';
+
+    function filterCards() {
+      const q = (searchInput?.value || '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title') || '';
+        const prompt = card.getAttribute('data-prompt') || '';
+        const category = card.getAttribute('data-category') || '';
+        const model = card.getAttribute('data-model') || '';
+
+        const matchesQuery = !q || title.includes(q) || prompt.includes(q);
+        const matchesCategory = currentCategory === 'all' || category.toLowerCase() === currentCategory.toLowerCase();
+        const matchesModel = currentModel === 'All' || model === currentModel;
+
+        if (matchesQuery && matchesCategory && matchesModel) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (countLabel) countLabel.textContent = visibleCount + ' Prompts';
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', filterCards);
+    }
+
+    // 2. Category Filter Switcher
+    const catBtns = document.querySelectorAll('.cat-filter-btn');
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => {
+          b.classList.remove('bg-violet-600', 'text-white');
+          b.classList.add('bg-[#131520]', 'text-slate-400');
+        });
+        btn.classList.add('bg-violet-600', 'text-white');
+        btn.classList.remove('bg-[#131520]', 'text-slate-400');
+        currentCategory = btn.getAttribute('data-category') || 'all';
+        filterCards();
+      });
+    });
+
+    // 3. Model Filter Switcher
+    const modelBtns = document.querySelectorAll('.model-filter-btn');
+    modelBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modelBtns.forEach(b => {
+          b.classList.remove('bg-violet-600', 'text-white');
+          b.classList.add('bg-[#151722]', 'text-slate-400');
+        });
+        btn.classList.add('bg-violet-600', 'text-white');
+        btn.classList.remove('bg-[#151722]', 'text-slate-400');
+        currentModel = btn.getAttribute('data-model') || 'All';
+        filterCards();
+      });
+    });
+
+    // 4. One-Click Copy Prompt
+    const copyBtns = document.querySelectorAll('.copy-prompt-btn');
+    copyBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const promptText = btn.getAttribute('data-prompt');
+        if (promptText) {
+          navigator.clipboard.writeText(promptText);
+          const original = btn.textContent;
+          btn.textContent = 'Copied! ✓';
+          btn.classList.add('bg-emerald-600', 'text-white');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('bg-emerald-600', 'text-white');
+          }, 2000);
+        }
+      });
+    });
+  </script>
 </Layout>

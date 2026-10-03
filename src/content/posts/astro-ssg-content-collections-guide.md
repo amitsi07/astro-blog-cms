@@ -6,7 +6,7 @@ type: "article"
 status: "published"
 featured: true
 excerpt: "Learn how to build, optimize, and deploy a zero-cost AI prompt directory on Cloudflare Pages using Astro and Sveltia CMS."
-model: undefined
+model: "Midjourney v6"
 category: "Tutorials & Guides"
 image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80"
 aspectRatio: "3:4"
@@ -17,7 +17,6 @@ settings: {}
 variables: []
 seo: {"metaTitle":"Complete Astro SSG & Cloudflare Pages Auto-Deploy Masterclass","metaDescription":"Master Astro Content Collections and Cloudflare Pages auto-deploy webhooks for zero-cost static web applications.","focusKeyword":"astro cloudflare auto deploy"}
 author: "Kenji Sato"
-authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
 copiesCount: 890
 likesCount: 340
 viewsCount: 4200

@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const published = await getCollection('posts', ({ data }) => data.status === 'published');
-const articles = published.filter(p => p.data.type === 'article');
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const articles = allPosts.filter(p => p.data.type === 'article');
 ---
 
 <Layout title="Articles & Photography Masterclasses – PromptPlum AI">
@@ -15,7 +15,7 @@ const articles = published.filter(p => p.data.type === 'article');
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {articles.map((item) => (
-        <a href={`/posts/${item.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500 rounded-2xl overflow-hidden p-6 transition-all space-y-3 flex flex-col justify-between">
+        <a href={`/posts/${item.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500 rounded-2xl overflow-hidden p-6 transition-all space-y-3 flex flex-col justify-between shadow-xl">
           <div>
             <div class="flex items-center gap-2 text-xs text-violet-400 font-mono mb-2">
               <span>{item.data.category}</span>

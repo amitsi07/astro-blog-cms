@@ -17,7 +17,6 @@ settings: {"lens":"100mm f/8 Macro, 1/500s","lighting":"Hard directional key str
 variables: [{"name":"Subject","token":"[Subject]","defaultValue":"a statue-like editorial fashion model","options":["a statue-like editorial fashion model","a poised dancer striking a dynamic angular pose","an androgynous model in silhouette against travertine","a couple in matching tailored raw linen trench coats"]}]
 seo: {"metaTitle":"Minimalist Haute Couture Fashion Prompt | Gemini & Imagen 3","metaDescription":"Generate Vogue Italia style high-fashion editorial imagery with travertine stone and architectural shadows.","focusKeyword":"fashion editorial prompt"}
 author: "Elena Vance"
-authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
 copiesCount: 1940
 likesCount: 512
 viewsCount: 6800

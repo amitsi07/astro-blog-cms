@@ -26,10 +26,10 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <style is:global>
       body {
-        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         background-color: #0b0c10;
         color: #e0e2ec;
       }
@@ -41,18 +41,21 @@ const {
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col bg-[#0b0c10] text-[#e0e2ec]">
+  <body class="min-h-screen flex flex-col bg-[#0b0c10] text-[#e0e2ec] antialiased">
+    <!-- Top Notice Bar -->
+    
+    <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-violet-950 text-violet-200 text-xs py-1.5 text-center font-medium border-b border-violet-900/40 px-4">
+      <span>⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled · Gutenberg CMS Active</span>
+    </div>
+
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-40 w-full bg-[#0c0d12]/95 backdrop-blur-md border-b border-[#1f222e]">
-      
-      <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-violet-950 text-violet-200 text-xs py-1.5 text-center font-medium border-b border-violet-900/40 px-4">
-        <span>⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled · Gutenberg CMS Active</span>
-      </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="/" class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-900/30">
             ✦
           </div>
-          <span class="font-display font-bold text-xl tracking-tight text-white">
+          <span class="font-display font-bold text-xl tracking-tight text-white hover:text-violet-300 transition-colors">
             PromptPlum AI
           </span>
         </a>
@@ -60,8 +63,8 @@ const {
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
           <a href="/" class="hover:text-white transition-colors">Explore Prompts</a>
           <a href="/articles" class="hover:text-white transition-colors">Articles</a>
-          <a href="/admin/" class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1">
-            <span>WP Admin</span> &rarr;
+          <a href="/admin/" class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-950/40 border border-violet-800/40">
+            <span>WP Admin Panel</span> &rarr;
           </a>
         </nav>
       </div>
@@ -69,6 +72,7 @@ const {
 
     <slot />
 
+    <!-- Footer -->
     <footer class="border-t border-[#1a1d29] bg-[#090a0f] text-slate-400 py-12 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
@@ -76,7 +80,7 @@ const {
           <div class="flex items-center gap-4">
             <a href="/" class="hover:text-white">Home</a>
             <a href="/articles" class="hover:text-white">Articles</a>
-            <a href="/admin/" class="hover:text-white">Admin CMS</a>
+            <a href="/admin/" class="text-violet-400 hover:underline">WordPress Admin CMS</a>
           </div>
         </div>
       </div>

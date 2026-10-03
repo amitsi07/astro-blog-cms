@@ -17,7 +17,6 @@ settings: {}
 variables: [{"name":"Flower","token":"[Flower]","defaultValue":"purple phalaenopsis orchid","options":["purple phalaenopsis orchid","black baccara rose","wild lotus blossom"]}]
 seo: {"metaTitle":"Macro Orchid Dewdrops Prompt","metaDescription":"Extreme macro photography prompt.","focusKeyword":"macro prompt"}
 author: "Elena Vance"
-authorAvatar: undefined
 copiesCount: 0
 likesCount: 12
 viewsCount: 45

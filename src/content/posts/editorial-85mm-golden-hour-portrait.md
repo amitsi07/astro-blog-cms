@@ -17,7 +17,6 @@ settings: {"stylize":"250","lighting":"Low-angle golden hour rim light + soft fi
 variables: [{"name":"Subject","token":"[Subject]","defaultValue":"a serene woman with subtle freckles and hazel eyes","options":["a serene woman with subtle freckles and hazel eyes","an elder craftsman with weathered hands and silver beard","a young jazz trumpeter in a bespoke charcoal blazer","an athlete with intense gaze catching rainwater droplets"]},{"name":"Lighting","token":"[Lighting]","defaultValue":"golden hour side lighting with warm amber rim highlights","options":["golden hour side lighting with warm amber rim highlights","diffused north-window studio daylight with gentle falloff","chiaroscuro candlelit illumination with deep rich shadows","soft overcast daylight with silver bounce board fill"]}]
 seo: {"metaTitle":"Editorial 85mm Portrait Prompt for Midjourney & Flux.1","metaDescription":"Generate studio quality 85mm portrait photography with real skin textures using this tested Midjourney v6 prompt.","focusKeyword":"85mm portrait midjourney prompt"}
 author: "Elena Vance"
-authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
 copiesCount: 2840
 likesCount: 642
 viewsCount: 9120

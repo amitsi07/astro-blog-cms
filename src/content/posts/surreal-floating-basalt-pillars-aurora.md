@@ -17,7 +17,6 @@ settings: {}
 variables: [{"name":"Feature","token":"[Feature]","defaultValue":"ancient mossy hexagonal basalt pillars","options":["ancient mossy hexagonal basalt pillars","crystalline geometric monoliths glowing with soft cyan light","floating bonsai islands connected by misty waterfalls","ancient weathered stone arches overlooking glacial fjords"]}]
 seo: {"metaTitle":"Surreal Alpine Aurora Landscape Prompt | DALL-E 3 & Midjourney","metaDescription":"Create breathtaking fantasy nature photography with floating basalt pillars and northern lights.","focusKeyword":"surreal landscape prompt"}
 author: "Elena Vance"
-authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
 copiesCount: 2200
 likesCount: 610
 viewsCount: 7900

@@ -1,22 +1,17 @@
-# PromptPlum AI (Astro SSG + Cloudflare Pages)
+# PromptPlum AI – Pure Astro 5.x Static Site & CMS
 
 Astro-Powered AI Photo Prompts & Photography Masterclasses
 
-## 🚀 Quick Start
+## ⚡ Cloudflare Pages Build Settings:
+- **Framework preset:** Astro
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- **Root directory:** `/`
+- **Node version:** 20 (configured in `.node-version`)
+
+## 🛠 Local Development
 ```bash
 npm install
 npm run dev
 ```
-
-## 📦 Build for Cloudflare Pages
-```bash
-npm run build
-```
-The build output will be located in `dist/`.
-
-## 🌐 Deploy to Cloudflare Pages (Free)
-1. Push this repo to GitHub.
-2. In Cloudflare Dashboard, go to **Workers & Pages** -> **Create application** -> **Pages** -> **Connect to Git**.
-3. Select this repository.
-4. Set Build command to `npm run build` and Output directory to `dist`.
-5. Deploy!
+Visit `http://localhost:4321`

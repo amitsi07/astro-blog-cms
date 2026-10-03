@@ -1,16 +1,12 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
+// Astro Static Site Generation for 100% Free Cloudflare Pages CDN
 export default defineConfig({
   site: 'https://promptplumai.pages.dev',
   output: 'static',
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    sitemap(),
-  ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   compressHTML: true,
 });
