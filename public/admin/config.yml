@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: your-username/promptplum-ai # Replace with your GitHub user/repo
+  repo: amitsi07/astro-blog-cms # Replace with your GitHub user/repo
   branch: main
   auth_type: ""
 
