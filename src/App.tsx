@@ -15,6 +15,7 @@ import { CtaSection } from './components/CtaSection';
 import { PromptModal } from './components/PromptModal';
 import { PromptCustomizerModal } from './components/PromptCustomizerModal';
 import { WordPressAdmin } from './components/admin/WordPressAdmin';
+import { AdminLogin } from './components/admin/AdminLogin';
 import { SveltiaDeploymentModal } from './components/SveltiaDeploymentModal';
 import { PromptGeneratorModal } from './components/PromptGeneratorModal';
 import { SinglePostView } from './components/SinglePostView';
@@ -52,7 +53,9 @@ const MainAppContent: React.FC = () => {
     setSearchQuery,
     setSelectedCategory,
     setSelectedModel,
-    setSelectedAspectRatio
+    setSelectedAspectRatio,
+    isAuthenticated,
+    login
   } = usePrompts();
 
   const [selectedPostForView, setSelectedPostForView] = useState<PostItem | null>(null);
@@ -139,8 +142,16 @@ const MainAppContent: React.FC = () => {
     setSelectedAspectRatio('All');
   };
 
-  // If Admin View is active, show the WordPress Admin Dashboard!
+  // If Admin View is active, check auth before displaying WordPress Admin or Login!
   if (currentView === 'admin') {
+    if (!isAuthenticated) {
+      return (
+        <>
+          <AdminLogin onLogin={login} />
+          <Toast />
+        </>
+      );
+    }
     return (
       <>
         <WordPressAdmin />

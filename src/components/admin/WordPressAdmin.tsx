@@ -21,6 +21,7 @@ import {
   Trash2, 
   Edit, 
   Eye, 
+  EyeOff,
   Clock, 
   CheckCircle2, 
   AlertCircle,
@@ -76,6 +77,8 @@ export const WordPressAdmin: React.FC = () => {
   const [newUsername, setNewUsername] = useState(currentUser?.username || 'admin');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showNewPass, setShowNewPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
 
   // Quick Draft State for Dashboard Widget
   const [quickTitle, setQuickTitle] = useState('');
@@ -412,6 +415,33 @@ export const WordPressAdmin: React.FC = () => {
             >
               <Palette className="w-4 h-4 text-pink-400" />
               <span>Site Customizer (All Sections)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setIsSecurityModalOpen(true);
+                setIsMobileSidebarOpen(false);
+              }}
+              className="w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium text-slate-300 hover:text-white hover:bg-[#202334] transition-colors cursor-pointer"
+            >
+              <span className="flex items-center gap-2.5">
+                <UserCheck className="w-4 h-4 text-emerald-400" />
+                <span>Users & Security</span>
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-violet-950/80 text-violet-300 border border-violet-800/40 font-mono">
+                {currentUser?.username || 'admin'}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                logout();
+                showToast('Logged out of WP Admin');
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded text-xs font-medium text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 transition-colors cursor-pointer mt-2 border border-rose-900/30"
+            >
+              <LogOut className="w-4 h-4 text-rose-400" />
+              <span>Sign Out ({currentUser?.username || 'admin'})</span>
             </button>
           </nav>
 
@@ -959,40 +989,82 @@ export const WordPressAdmin: React.FC = () => {
               className="space-y-4 text-xs"
             >
               <div className="space-y-1.5">
-                <label className="block font-semibold text-slate-300">Admin Username</label>
+                <div className="flex items-center justify-between">
+                  <label className="block font-semibold text-slate-300">Admin Username</label>
+                  <span className="text-[10px] text-slate-500 font-mono">Current: {currentUser?.username || 'admin'}</span>
+                </div>
                 <input
                   type="text"
                   required
                   value={newUsername}
                   onChange={(e) => setNewUsername(e.target.value)}
+                  placeholder="e.g. myadmin"
                   className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label className="block font-semibold text-slate-300">New Password</label>
-                <input
-                  type="password"
-                  placeholder="Leave blank to keep default 'admin123'"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
-                />
+                <div className="relative">
+                  <input
+                    type={showNewPass ? 'text' : 'password'}
+                    placeholder="Enter new password (min 6 characters)"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg pl-3 pr-9 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPass(!showNewPass)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-300 cursor-pointer"
+                  >
+                    {showNewPass ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="block font-semibold text-slate-300">Confirm New Password</label>
-                <input
-                  type="password"
-                  placeholder="Repeat new password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
-                />
+                <div className="relative">
+                  <input
+                    type={showConfirmPass ? 'text' : 'password'}
+                    placeholder="Repeat new password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg pl-3 pr-9 py-2 text-white font-mono focus:outline-none focus:border-violet-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPass(!showConfirmPass)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-300 cursor-pointer"
+                  >
+                    {showConfirmPass ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
               </div>
 
-              <div className="p-3 bg-[#0d0e17] rounded-lg border border-[#242838] text-[11px] text-slate-400">
-                <span>🔐 Protected with browser-level session storage and encrypted local authentication.</span>
+              <div className="p-3 bg-[#0d0e17] rounded-lg border border-[#242838] text-[11px] text-slate-400 space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span>🔐 Encrypted session storage active</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (confirm('Reset credentials back to default (admin / admin123)?')) {
+                        updateAdminCredentials('admin', 'admin123');
+                        setNewUsername('admin');
+                        setNewPassword('');
+                        setConfirmPassword('');
+                        showToast('Reset to default credentials: admin / admin123');
+                      }
+                    }}
+                    className="text-[10px] text-amber-400 hover:underline cursor-pointer"
+                  >
+                    Reset to Default
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-500">
+                  Credentials take effect immediately for all subsequent login sessions.
+                </p>
               </div>
 
               <div className="pt-2 flex items-center justify-end gap-2">

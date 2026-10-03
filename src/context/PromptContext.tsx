@@ -145,7 +145,7 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         if (parsed.password) savedPass = parsed.password;
       }
 
-      if ((u === savedUser || u === 'admin') && (p === savedPass || p === 'admin123')) {
+      if (u === savedUser && p === savedPass) {
         setIsAuthenticated(true);
         setCurrentUser({
           username: u,
