@@ -1,4 +1,0 @@
-/wp-admin /wp-admin/ 301
-/wp-admin/* /wp-admin/index.html 200
-/admin /admin/ 301
-/admin/* /admin/index.html 200

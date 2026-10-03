@@ -12,18 +12,17 @@ image: "/src/assets/images/fantasy_landscape_1790912697089.jpg"
 aspectRatio: "4:3"
 prompt: "Surreal majestic landscape of [Feature] floating above a mirror-calm glacial alpine lake at twilight, vibrant ethereal aurora borealis rippling across the violet sky, dramatic atmospheric mist, 24mm wide angle perspective, National Geographic fine art photography --ar 4:3"
 negativePrompt: ""
-tags:
-  - "Landscape"
-  - "Surreal"
-  - "Aurora"
-  - "Basalt"
-  - "Alpine Lake"
+tags: ["Landscape","Surreal","Aurora","Basalt","Alpine Lake"]
+settings: {}
+variables: [{"name":"Feature","token":"[Feature]","defaultValue":"ancient mossy hexagonal basalt pillars","options":["ancient mossy hexagonal basalt pillars","crystalline geometric monoliths glowing with soft cyan light","floating bonsai islands connected by misty waterfalls","ancient weathered stone arches overlooking glacial fjords"]}]
+seo: {"metaTitle":"Surreal Alpine Aurora Landscape Prompt | DALL-E 3 & Midjourney","metaDescription":"Create breathtaking fantasy nature photography with floating basalt pillars and northern lights.","focusKeyword":"surreal landscape prompt"}
 author: "Elena Vance"
+copiesCount: 2200
+likesCount: 610
+viewsCount: 7900
 publishedAt: "2026-09-24T12:00:00Z"
 createdAt: "2026-09-24T11:00:00Z"
 updatedAt: "2026-10-01T14:15:00Z"
-variables: [{"name":"Feature","token":"[Feature]","defaultValue":"ancient mossy hexagonal basalt pillars","options":["ancient mossy hexagonal basalt pillars","crystalline geometric monoliths glowing with soft cyan light","floating bonsai islands connected by misty waterfalls","ancient weathered stone arches overlooking glacial fjords"]}]
-seo: {"metaTitle":"Surreal Alpine Aurora Landscape Prompt | DALL-E 3 & Midjourney","metaDescription":"Create breathtaking fantasy nature photography with floating basalt pillars and northern lights.","focusKeyword":"surreal landscape prompt"}
 ---
 
 ## Environmental Lighting & Volumetric Depth

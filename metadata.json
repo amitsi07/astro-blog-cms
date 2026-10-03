@@ -1,6 +1,0 @@
-{
-  "name": "PromptPlum AI – Prompts Library & Sveltia CMS",
-  "description": "Curated library of tested AI photo editing and image generation prompts for Midjourney, Gemini, ChatGPT, and Flux, with built-in Sveltia CMS & Cloudflare deployment.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

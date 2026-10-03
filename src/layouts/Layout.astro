@@ -6,9 +6,9 @@ interface Props {
 }
 
 const {
-  title = "PromptPlum AI – Curated AI Image Prompts Library & Astro CMS",
-  description = "Explore, customize, and copy tested AI photo editing and generation prompts for Midjourney, Gemini, ChatGPT, and Flux.",
-  ogImage = "/images/cinematic_portrait_1790912658842.jpg"
+  title = "PromptPlum AI – Astro-Powered AI Photo Prompts & Photography Masterclasses",
+  description = "Discover, customize, and copy tested AI photography prompts for Midjourney, Gemini, ChatGPT, and Flux. 100% free Cloudflare Pages + Astro SSG deployment.",
+  ogImage = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80"
 } = Astro.props;
 ---
 
@@ -24,14 +24,10 @@ const {
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <style is:global>
-      @import "tailwindcss";
       body {
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         background-color: #0b0c10;
@@ -45,75 +41,46 @@ const {
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col bg-[#0b0c10] text-[#e0e2ec] antialiased selection:bg-violet-500/30 selection:text-violet-200">
-    <!-- Notice Bar -->
-    <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-violet-950 text-violet-200 text-xs py-2 text-center font-medium border-b border-violet-900/40 px-4 flex items-center justify-center gap-2">
-      <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span>Astro 5 Static Architecture · 100% Free Hosting on Cloudflare Pages Edge CDN</span>
+  <body class="min-h-screen flex flex-col bg-[#0b0c10] text-[#e0e2ec] antialiased">
+    <!-- Top Notice Bar -->
+    
+    <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-violet-950 text-violet-200 text-xs py-1.5 text-center font-medium border-b border-violet-900/40 px-4">
+      <span>⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled · Gutenberg CMS Active</span>
     </div>
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 w-full bg-[#0c0d12]/95 backdrop-blur-md border-b border-[#1f222e]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 group">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-900/30 group-hover:scale-105 transition-transform">
+        <a href="/" class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-900/30">
             ✦
           </div>
-          <span class="font-display font-bold text-xl tracking-tight text-white group-hover:text-violet-300 transition-colors">
-            PromptPlum<span class="text-violet-400">.astro</span>
+          <span class="font-display font-bold text-xl tracking-tight text-white hover:text-violet-300 transition-colors">
+            PromptPlum AI
           </span>
         </a>
 
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
           <a href="/" class="hover:text-white transition-colors">Explore Prompts</a>
           <a href="/articles" class="hover:text-white transition-colors">Articles</a>
-          <a href="/wp-admin" class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-950/40 border border-violet-800/40 transition-colors">
-            <span>WP Admin CMS</span> &rarr;
+          <a href="/admin/" class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-950/40 border border-violet-800/40">
+            <span>WP Admin Panel</span> &rarr;
           </a>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content Area -->
     <slot />
 
     <!-- Footer -->
     <footer class="border-t border-[#1a1d29] bg-[#090a0f] text-slate-400 py-12 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div class="md:col-span-2 space-y-3">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded bg-violet-600 flex items-center justify-center text-white text-xs font-bold">✦</div>
-              <span class="font-display font-bold text-white text-lg">PromptPlum AI</span>
-            </div>
-            <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Open-source AI Prompt Engineering & Content Management System built with pure Astro static content collections and high performance Cloudflare Pages edge delivery.
-            </p>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3 font-mono">Navigation</h4>
-            <ul class="space-y-2 text-xs">
-              <li><a href="/" class="hover:text-white transition-colors">Prompt Directory</a></li>
-              <li><a href="/articles" class="hover:text-white transition-colors">Lighting Masterclasses</a></li>
-              <li><a href="/admin/" class="hover:text-white transition-colors">Sveltia Git CMS</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3 font-mono">Deployment</h4>
-            <ul class="space-y-2 text-xs">
-              <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cloudflare Pages Edge</li>
-              <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span> Astro 5 Static Engine</li>
-              <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> 0kb Client Runtime</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pt-8 border-t border-[#161822] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <p>© 2026 PromptPlum AI · Open Source Architecture</p>
           <div class="flex items-center gap-4">
             <a href="/" class="hover:text-white">Home</a>
             <a href="/articles" class="hover:text-white">Articles</a>
-            <a href="/wp-admin" class="text-violet-400 hover:underline">WP Admin CMS</a>
+            <a href="/admin/" class="text-violet-400 hover:underline">WordPress Admin CMS</a>
           </div>
         </div>
       </div>

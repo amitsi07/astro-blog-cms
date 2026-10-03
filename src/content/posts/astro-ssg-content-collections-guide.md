@@ -12,17 +12,17 @@ image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fi
 aspectRatio: "3:4"
 prompt: ""
 negativePrompt: ""
-tags:
-  - "Astro"
-  - "Cloudflare"
-  - "SSG"
-  - "Web Development"
-  - "Tutorial"
+tags: ["Astro","Cloudflare","SSG","Web Development","Tutorial"]
+settings: {}
+variables: []
+seo: {"metaTitle":"Complete Astro SSG & Cloudflare Pages Auto-Deploy Masterclass","metaDescription":"Master Astro Content Collections and Cloudflare Pages auto-deploy webhooks for zero-cost static web applications.","focusKeyword":"astro cloudflare auto deploy"}
 author: "Kenji Sato"
+copiesCount: 890
+likesCount: 340
+viewsCount: 4200
 publishedAt: "2026-09-25T17:00:00Z"
 createdAt: "2026-09-25T16:00:00Z"
 updatedAt: "2026-10-01T10:00:00Z"
-seo: {"metaTitle":"Complete Astro SSG & Cloudflare Pages Auto-Deploy Masterclass","metaDescription":"Master Astro Content Collections and Cloudflare Pages auto-deploy webhooks for zero-cost static web applications.","focusKeyword":"astro cloudflare auto deploy"}
 ---
 
 ## Why Astro is the #1 Choice for Modern AI Directories

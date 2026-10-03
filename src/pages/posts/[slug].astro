@@ -17,98 +17,74 @@ const allPosts = await getCollection('posts', ({ data }) => data.status === 'pub
 const relatedPosts = allPosts.filter(p => p.data.category === entry.data.category).slice(0, 3);
 ---
 
-<Layout
-  title={`${entry.data.title} – AI Prompt Formula | PromptPlum`}
-  description={entry.data.excerpt || entry.data.prompt}
-  ogImage={entry.data.image}
->
+<Layout title={`${entry.data.title} – ${entry.data.model || 'Prompt'}`} description={entry.data.excerpt} ogImage={entry.data.image}>
   <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
     <!-- Breadcrumbs -->
     <div class="mb-6 flex items-center gap-2 text-xs font-mono text-slate-400">
-      <a href="/" class="text-violet-400 hover:underline flex items-center gap-1">&larr; Back to Directory</a>
-      <span>/</span>
+      <a href="/" class="text-violet-400 hover:underline">&larr; All Prompts</a>
+      <span>·</span>
       <span>{entry.data.category}</span>
-      <span>/</span>
-      <span class="text-emerald-400 font-semibold">{entry.data.model}</span>
+      <span>·</span>
+      <span class="text-emerald-400">{entry.data.model}</span>
     </div>
 
-    <!-- Title & Metadata -->
-    <h1 class="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight mb-4 leading-tight">
+    <!-- Title & Excerpt -->
+    <h1 class="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
       {entry.data.title}
     </h1>
 
-    <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 mb-6 pb-6 border-b border-[#1f222e]">
-      <span>By <strong class="text-white">{entry.data.author}</strong></span>
-      <span>·</span>
-      <span>Published {entry.data.publishedAt || entry.data.createdAt}</span>
-      <span>·</span>
-      <span class="px-2 py-0.5 rounded bg-violet-950/60 text-violet-300 border border-violet-800/40">{entry.data.aspectRatio} Aspect</span>
-    </div>
-
     {entry.data.excerpt && (
-      <p class="text-base text-slate-300 leading-relaxed mb-8 border-l-2 border-violet-500 pl-4 italic bg-[#10121a]/50 py-2 rounded-r-lg">
+      <p class="text-base text-slate-300 leading-relaxed mb-8 border-l-2 border-violet-500 pl-4 italic">
         {entry.data.excerpt}
       </p>
     )}
 
     <!-- Large Featured Image -->
-    <div class="rounded-2xl overflow-hidden mb-8 border border-[#23273a] shadow-2xl bg-black/60 relative">
-      <img
-        src={entry.data.image}
-        alt={entry.data.title}
-        class="w-full object-cover max-h-[680px]"
-        loading="eager"
-      />
+    <div class="rounded-2xl overflow-hidden mb-8 border border-[#23273a] shadow-2xl bg-black">
+      <img src={entry.data.image} alt={entry.data.title} class="w-full object-cover max-h-[640px]" />
     </div>
 
-    <!-- Tested AI Prompt Formula Box -->
+    <!-- Prompt Formulation Box -->
     {entry.data.prompt && (
-      <div class="bg-[#141624] border border-violet-800/40 rounded-2xl p-6 mb-10 shadow-xl space-y-4">
+      <div class="bg-[#141624] border border-violet-800/40 rounded-2xl p-6 mb-8 shadow-xl space-y-4">
         <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
-            <span class="font-bold text-violet-300 uppercase tracking-wider font-mono">Tested AI Prompt Formula</span>
-          </div>
-          <span class="text-slate-400 font-mono text-[11px] px-2 py-0.5 rounded bg-black/40 border border-white/5">{entry.data.model}</span>
+          <span class="font-bold text-violet-300 uppercase tracking-wider font-mono">Tested AI Prompt Formula</span>
+          <span class="text-slate-400 font-mono">{entry.data.aspectRatio}</span>
         </div>
-
-        <pre id="formulaText" class="bg-[#0b0c14] border border-[#232738] p-4 rounded-xl text-sm font-mono text-slate-200 select-all whitespace-pre-wrap leading-relaxed shadow-inner">{entry.data.prompt}</pre>
-
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <pre id="formulaText" class="bg-[#0b0c14] border border-[#232738] p-4 rounded-xl text-sm font-mono text-slate-200 select-all whitespace-pre-wrap leading-relaxed">
+          {entry.data.prompt}
+        </pre>
+        <div class="flex items-center justify-between pt-1">
           <button
             id="copyFormulaBtn"
             type="button"
-            class="px-6 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold transition-all shadow-md cursor-pointer flex items-center gap-2"
+            class="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold transition-all shadow-md cursor-pointer"
           >
-            <span>Copy Complete Formula</span>
+            Copy Prompt Formula
           </button>
-          <span class="text-[11px] text-slate-400 font-mono">Ready to paste into {entry.data.model}</span>
         </div>
-
         {entry.data.negativePrompt && (
-          <div class="pt-3 text-xs text-rose-300 font-mono border-t border-[#232738] space-y-1">
-            <span class="font-bold text-rose-400">Negative Prompt:</span>
-            <div class="bg-[#0b0c14] border border-rose-950 p-2.5 rounded-lg text-rose-200 select-all">{entry.data.negativePrompt}</div>
+          <div class="pt-2 text-xs text-rose-300 font-mono border-t border-[#232738]">
+            <span class="font-bold">Negative Prompt:</span> {entry.data.negativePrompt}
           </div>
         )}
       </div>
     )}
 
-    <!-- Markdown Content Body -->
-    <div class="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base border-t border-[#1f222e] pt-8">
+    <!-- Content Markdown Body -->
+    <div class="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base">
       <Content />
     </div>
 
-    <!-- Related Prompts in Category -->
+    <!-- Related Prompts -->
     {relatedPosts.length > 0 && (
       <div class="mt-16 pt-8 border-t border-[#1f222e]">
-        <h3 class="text-xl font-bold text-white mb-6 font-display">More in {entry.data.category}</h3>
+        <h3 class="text-xl font-bold text-white mb-6">More in {entry.data.category}</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {relatedPosts.map(rp => (
-            <a href={`/posts/${rp.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500 rounded-xl overflow-hidden p-3 block transition-all shadow-lg">
-              <img src={rp.data.image} alt={rp.data.title} class="w-full aspect-[4/3] object-cover rounded-lg mb-2 group-hover:scale-105 transition-transform" />
+            <a href={`/posts/${rp.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500 rounded-xl overflow-hidden p-3 block">
+              <img src={rp.data.image} alt={rp.data.title} class="w-full aspect-[4/3] object-cover rounded-lg mb-2" />
               <h4 class="text-xs font-bold text-white group-hover:text-violet-300 truncate">{rp.data.title}</h4>
-              <span class="text-[11px] text-slate-400 font-mono mt-1 block">{rp.data.model}</span>
             </a>
           ))}
         </div>
@@ -122,11 +98,11 @@ const relatedPosts = allPosts.filter(p => p.data.category === entry.data.categor
     if (btn && textEl) {
       btn.addEventListener('click', () => {
         navigator.clipboard.writeText(textEl.textContent.trim());
-        const original = btn.innerHTML;
-        btn.innerHTML = '<span>Copied to Clipboard! ✓</span>';
+        const original = btn.textContent;
+        btn.textContent = 'Copied to Clipboard! ✓';
         btn.classList.add('bg-emerald-600');
         setTimeout(() => {
-          btn.innerHTML = original;
+          btn.textContent = original;
           btn.classList.remove('bg-emerald-600');
         }, 2000);
       });
