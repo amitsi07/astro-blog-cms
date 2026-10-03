@@ -5,9 +5,7 @@ backend:
   name: github
   repo: your-username/promptplum-ai # Replace with your GitHub user/repo
   branch: main
-  # Sveltia supports free GitHub OAuth via auth proxies or personal tokens
-  auth_type: implicit
-  base_url: https://sveltia-cms-auth.vercel.app
+  auth_type: ""
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -16,10 +14,10 @@ display_url: "/"
 logo_url: "/logo.svg"
 
 collections:
-  - name: "prompts"
-    label: "AI Prompts"
-    label_singular: "Prompt"
-    folder: "content/prompts"
+  - name: "posts"
+    label: "Prompts & Articles"
+    label_singular: "Post"
+    folder: "src/content/posts"
     create: true
     slug: "{{slug}}"
     format: "json"

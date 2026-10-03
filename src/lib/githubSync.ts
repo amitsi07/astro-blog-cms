@@ -242,10 +242,33 @@ export const collections = {
     });
   });
 
+  // 6.5. src/styles/global.css
+  files.push({
+    path: 'src/styles/global.css',
+    content: `@import "tailwindcss";
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #0b0c10;
+  color: #e0e2ec;
+}
+
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+`
+  });
+
   // 7. src/layouts/Layout.astro
   files.push({
     path: 'src/layouts/Layout.astro',
     content: `---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
