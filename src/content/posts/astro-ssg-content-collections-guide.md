@@ -4,7 +4,7 @@ title: "The Ultimate Guide to Astro SSG, Content Collections & Cloudflare Auto-D
 slug: "astro-ssg-content-collections-guide"
 type: "article"
 status: "published"
-featured: true
+featured: false
 excerpt: "Learn how to build, optimize, and deploy a zero-cost AI prompt directory on Cloudflare Pages using Astro and Sveltia CMS."
 model: "Midjourney v6"
 category: "Tutorials & Guides"
@@ -20,9 +20,9 @@ author: "Kenji Sato"
 copiesCount: 890
 likesCount: 340
 viewsCount: 4200
-publishedAt: "2026-09-25T17:00:00Z"
+publishedAt: "2026-10-03"
 createdAt: "2026-09-25T16:00:00Z"
-updatedAt: "2026-10-01T10:00:00Z"
+updatedAt: "2026-10-03"
 ---
 
 ## Why Astro is the #1 Choice for Modern AI Directories

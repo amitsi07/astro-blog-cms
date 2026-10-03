@@ -3,7 +3,7 @@ id: "post-6"
 title: "Draft: Hyper-Realistic Macro Studio Photography of Dewdrops on Orchid Petals"
 slug: "macro-studio-orchid-dewdrops"
 type: "prompt"
-status: "draft"
+status: "published"
 featured: false
 excerpt: "Extreme macro optical focus stacking prompt with prism rainbow reflections in water droplets."
 model: "Midjourney v6"
@@ -20,9 +20,9 @@ author: "Elena Vance"
 copiesCount: 0
 likesCount: 12
 viewsCount: 45
-publishedAt: "2026-09-28T09:00:00Z"
+publishedAt: "2026-10-03"
 createdAt: "2026-09-28T09:00:00Z"
-updatedAt: "2026-09-28T09:00:00Z"
+updatedAt: "2026-10-03"
 ---
 
 ## Macro Optical Formula

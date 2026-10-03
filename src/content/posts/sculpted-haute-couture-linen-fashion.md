@@ -4,11 +4,11 @@ title: "Sculpted Haute Couture Linen & Travertine Studio Fashion Editorial"
 slug: "sculpted-haute-couture-linen-fashion"
 type: "prompt"
 status: "published"
-featured: true
+featured: false
 excerpt: "Architectural minimalism meets luxury fashion photography with dramatic hard-edged shadow geometry."
 model: "Gemini / Imagen 3"
 category: "Fashion & Editorial"
-image: "/src/assets/images/fashion_editorial_1790912686462.jpg"
+image: "/images/fashion_editorial_1790912686462.jpg"
 aspectRatio: "3:4"
 prompt: "High fashion editorial studio photograph of [Subject] wearing an avant-garde sculpted raw linen architectural blazer, minimalist warm travertine limestone backdrop, dramatic sharp architectural shadow patterns, Hasselblad 100mm medium format clarity, muted organic earth palette, Vogue Italia aesthetics --ar 3:4"
 negativePrompt: ""
@@ -20,9 +20,9 @@ author: "Elena Vance"
 copiesCount: 1940
 likesCount: 512
 viewsCount: 6800
-publishedAt: "2026-09-22T09:00:00Z"
+publishedAt: "2026-10-03"
 createdAt: "2026-09-22T08:00:00Z"
-updatedAt: "2026-10-01T12:00:00Z"
+updatedAt: "2026-10-03"
 ---
 
 ## High Fashion Editorial Prompt Breakdown

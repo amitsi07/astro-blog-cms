@@ -4,11 +4,11 @@ title: "Editorial 85mm Golden Hour Portrait with Natural Freckles"
 slug: "editorial-85mm-golden-hour-portrait"
 type: "prompt"
 status: "published"
-featured: true
+featured: false
 excerpt: "Award-winning Hasselblad H6D-100c studio portrait prompt with customizable lighting angles and skin texture controls."
 model: "Midjourney v6"
 category: "Portraits"
-image: "/src/assets/images/cinematic_portrait_1790912658842.jpg"
+image: "/images/cinematic_portrait_1790912658842.jpg"
 aspectRatio: "3:4"
 prompt: "Cinematic 85mm portrait of [Subject] with natural hyper-detailed skin texture, soft dramatic side [Lighting], muted emerald and warm amber tones, shallow depth of field, award-winning editorial Vogue photography, shot on Hasselblad H6D-100c --ar 3:4 --v 6.0 --style raw"
 negativePrompt: "over-smoothed skin, plastic look, cartoon, blur, bad eyes, extra fingers, deformed face, high saturation"
@@ -20,9 +20,9 @@ author: "Elena Vance"
 copiesCount: 2840
 likesCount: 642
 viewsCount: 9120
-publishedAt: "2026-09-18T12:00:00Z"
+publishedAt: "2026-10-03"
 createdAt: "2026-09-18T10:00:00Z"
-updatedAt: "2026-10-01T15:20:00Z"
+updatedAt: "2026-10-03"
 ---
 
 ## The Concept & Lighting Architecture

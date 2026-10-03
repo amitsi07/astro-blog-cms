@@ -8,7 +8,7 @@ featured: false
 excerpt: "Surreal National Geographic landscape with mossy floating basalt monoliths and vibrant twilight aurora."
 model: "ChatGPT / DALL·E 3"
 category: "Fantasy & Surreal"
-image: "/src/assets/images/fantasy_landscape_1790912697089.jpg"
+image: "/images/fantasy_landscape_1790912697089.jpg"
 aspectRatio: "4:3"
 prompt: "Surreal majestic landscape of [Feature] floating above a mirror-calm glacial alpine lake at twilight, vibrant ethereal aurora borealis rippling across the violet sky, dramatic atmospheric mist, 24mm wide angle perspective, National Geographic fine art photography --ar 4:3"
 negativePrompt: ""
@@ -20,9 +20,9 @@ author: "Elena Vance"
 copiesCount: 2200
 likesCount: 610
 viewsCount: 7900
-publishedAt: "2026-09-24T12:00:00Z"
+publishedAt: "2026-10-03"
 createdAt: "2026-09-24T11:00:00Z"
-updatedAt: "2026-10-01T14:15:00Z"
+updatedAt: "2026-10-03"
 ---
 
 ## Environmental Lighting & Volumetric Depth
