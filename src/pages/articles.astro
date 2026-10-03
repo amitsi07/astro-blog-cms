@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const published = await getCollection('posts', ({ data }) => data.status === 'published');
+const articles = published.filter(p => p.data.type === 'article');
+---
+
+<Layout title="Articles & Photography Masterclasses – PromptPlum AI">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-10 pb-4 border-b border-[#1f222e]">
+      <h1 class="text-3xl sm:text-4xl font-display font-extrabold text-white">Articles & Photography Masterclasses</h1>
+      <p class="text-slate-400 text-sm mt-1">Deep dives into lighting, camera lenses, and prompt optimization formulas.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {articles.map((item) => (
+        <a href={`/posts/${item.data.slug}`} class="group bg-[#131520] border border-[#23273a] hover:border-violet-500 rounded-2xl overflow-hidden p-6 transition-all space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-xs text-violet-400 font-mono mb-2">
+              <span>{item.data.category}</span>
+              <span>·</span>
+              <span class="text-slate-500">{item.data.publishedAt || item.data.createdAt}</span>
+            </div>
+            <h2 class="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">
+              {item.data.title}
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 line-clamp-3 mt-2 leading-relaxed">
+              {item.data.excerpt}
+            </p>
+          </div>
+          <span class="text-xs font-semibold text-violet-400 group-hover:underline">Read Full Masterclass &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

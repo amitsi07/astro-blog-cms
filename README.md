@@ -1,20 +1,22 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# PromptPlum AI (Astro SSG + Cloudflare Pages)
 
-# Run and deploy your AI Studio app
+Astro-Powered AI Photo Prompts & Photography Masterclasses
 
-This contains everything you need to run your app locally.
+## 🚀 Quick Start
+```bash
+npm install
+npm run dev
+```
 
-View your app in AI Studio: https://ai.studio/apps/3170616a-69d6-4b29-b0fa-2af265ee256c
+## 📦 Build for Cloudflare Pages
+```bash
+npm run build
+```
+The build output will be located in `dist/`.
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🌐 Deploy to Cloudflare Pages (Free)
+1. Push this repo to GitHub.
+2. In Cloudflare Dashboard, go to **Workers & Pages** -> **Create application** -> **Pages** -> **Connect to Git**.
+3. Select this repository.
+4. Set Build command to `npm run build` and Output directory to `dist`.
+5. Deploy!

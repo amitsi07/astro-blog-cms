@@ -1,0 +1,85 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "PromptPlum AI – Astro-Powered AI Photo Prompts & Photography Masterclasses",
+  description = "Discover, customize, and copy tested AI photography prompts for Midjourney, Gemini, ChatGPT, and Flux. 100% free Cloudflare Pages + Astro SSG deployment.",
+  ogImage = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style is:global>
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        background-color: #0b0c10;
+        color: #e0e2ec;
+      }
+      .font-display {
+        font-family: 'Syne', sans-serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#0b0c10] text-[#e0e2ec]">
+    <header class="sticky top-0 z-40 w-full bg-[#0c0d12]/95 backdrop-blur-md border-b border-[#1f222e]">
+      
+      <div class="bg-gradient-to-r from-violet-950 via-indigo-950 to-violet-950 text-violet-200 text-xs py-1.5 text-center font-medium border-b border-violet-900/40 px-4">
+        <span>⚡ 100% Free Astro SSG + Cloudflare Auto-Deploy Enabled · Gutenberg CMS Active</span>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center text-white font-bold shadow-md shadow-violet-900/30">
+            ✦
+          </div>
+          <span class="font-display font-bold text-xl tracking-tight text-white">
+            PromptPlum AI
+          </span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+          <a href="/" class="hover:text-white transition-colors">Explore Prompts</a>
+          <a href="/articles" class="hover:text-white transition-colors">Articles</a>
+          <a href="/admin/" class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1">
+            <span>WP Admin</span> &rarr;
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="border-t border-[#1a1d29] bg-[#090a0f] text-slate-400 py-12 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <p>© 2026 PromptPlum AI · Open Source Architecture</p>
+          <div class="flex items-center gap-4">
+            <a href="/" class="hover:text-white">Home</a>
+            <a href="/articles" class="hover:text-white">Articles</a>
+            <a href="/admin/" class="hover:text-white">Admin CMS</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
