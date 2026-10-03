@@ -116,7 +116,7 @@ export function generateAstroFilesBundle(
     }, null, 2)
   });
 
-  // 2. .node-version & .nvmrc to force Cloudflare Pages to use Node 20+
+  // 2. .node-version, .nvmrc & .npmrc to force Node 20+ and smooth dependency resolution
   files.push({
     path: '.node-version',
     content: '20\n'
@@ -124,6 +124,10 @@ export function generateAstroFilesBundle(
   files.push({
     path: '.nvmrc',
     content: '20\n'
+  });
+  files.push({
+    path: '.npmrc',
+    content: 'legacy-peer-deps=true\n'
   });
 
   // 3. astro.config.mjs

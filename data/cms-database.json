@@ -451,7 +451,7 @@
     "enableModeration": true,
     "webhookUrl": "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/demo-hook-9981",
     "autoDeployOnPublish": true,
-    "githubRepo": "promptplum/promptplum-astro",
+    "githubRepo": "amitsi07/astro-blog-cms",
     "githubBranch": "main"
   },
   "customizer": {
