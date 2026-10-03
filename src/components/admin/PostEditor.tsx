@@ -295,6 +295,7 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
     addMedia,
     saveDraft, 
     publishPost, 
+    setEditingPostId,
     isBuilding, 
     showToast 
   } = usePrompts();
@@ -485,29 +486,44 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
     }
     setIsSaving(true);
     const data = getFormData('draft');
-    saveDraft(data);
+    const saved = saveDraft(data);
+    if (saved?.id) {
+      setEditingPostId(saved.id);
+    }
     setStatus('draft');
     setLastSavedTime(new Date().toLocaleTimeString());
     setTimeout(() => setIsSaving(false), 400);
   };
 
   // 2. PUBLISH / UPDATE & DEPLOY (WordPress Workflow: Triggers Cloudflare Deploy!)
-  const handlePublish = async () => {
+  const handlePublish = async (shouldClose: boolean = false) => {
     if (!title.trim()) {
       showToast('Please enter a post title');
       return;
     }
-    if (type === 'prompt' && !prompt.trim()) {
-      showToast('Please enter prompt text');
-      return;
+    let currentPrompt = prompt;
+    if (type === 'prompt' && !currentPrompt.trim()) {
+      currentPrompt = title;
+      setPrompt(title);
     }
 
     setIsSaving(true);
     const data = getFormData('published');
-    await publishPost(data);
+    if (type === 'prompt') {
+      data.prompt = currentPrompt;
+    }
+
+    const published = await publishPost(data);
+    if (published?.id) {
+      setEditingPostId(published.id);
+    }
     setStatus('published');
     setLastSavedTime(new Date().toLocaleTimeString());
     setIsSaving(false);
+
+    if (shouldClose) {
+      onClose();
+    }
   };
 
   // Block Manipulation Helpers
@@ -650,14 +666,14 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
 
             {/* 2. PUBLISH / UPDATE & DEPLOY BUTTON (TRIGGERS CLOUDFLARE BUILD) */}
             <button
-              onClick={handlePublish}
+              onClick={() => handlePublish(false)}
               disabled={isSaving || isBuilding}
               className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 text-xs font-semibold rounded-lg shadow-md transition-all cursor-pointer ${
                 status === 'published'
                   ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-900/30'
                   : 'bg-violet-600 hover:bg-violet-500 text-white shadow-violet-900/40'
               }`}
-              title="Publish and trigger Cloudflare Pages Auto-Deploy"
+              title="Publish and keep editing"
             >
               {isBuilding ? (
                 <>
@@ -670,6 +686,17 @@ export const PostEditor: React.FC<PostEditorProps> = ({ postId, onClose }) => {
                   <span>{status === 'published' ? 'Update & Deploy' : 'Publish to Live'}</span>
                 </>
               )}
+            </button>
+
+            {/* 3. PUBLISH & EXIT BUTTON */}
+            <button
+              onClick={() => handlePublish(true)}
+              disabled={isSaving || isBuilding}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg shadow-md transition-all cursor-pointer disabled:opacity-50"
+              title="Publish post and return to All Posts"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Publish & Exit</span>
             </button>
 
           </div>

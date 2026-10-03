@@ -39,6 +39,7 @@ import {
   FileCode,
   BookmarkCheck,
   Github,
+  Rocket,
   LogOut,
   KeyRound,
   UserCheck,
@@ -611,13 +612,39 @@ export const WordPressAdmin: React.FC = () => {
                       className="w-full bg-[#0d0e17] border border-[#282c3f] rounded-lg p-3 text-xs text-white focus:outline-none focus:border-violet-500 font-mono"
                     />
 
-                    <div className="flex items-center justify-between pt-1">
-                      <button
-                        type="submit"
-                        className="px-4 py-1.5 bg-[#23273a] hover:bg-[#2c324a] text-slate-200 text-xs font-medium rounded-lg transition-colors cursor-pointer"
-                      >
-                        Save Draft
-                      </button>
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="submit"
+                          className="px-3.5 py-1.5 bg-[#23273a] hover:bg-[#2c324a] text-slate-200 text-xs font-medium rounded-lg transition-colors cursor-pointer"
+                        >
+                          Save Draft
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!quickTitle.trim()) {
+                              showToast('Please enter a post title');
+                              return;
+                            }
+                            publishPost({
+                              title: quickTitle,
+                              type: quickType,
+                              prompt: quickType === 'prompt' ? quickContent : undefined,
+                              content: quickContent,
+                              excerpt: quickContent.slice(0, 120),
+                              category: 'Portraits'
+                            });
+                            setQuickTitle('');
+                            setQuickContent('');
+                          }}
+                          className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer flex items-center gap-1 shadow"
+                        >
+                          <Rocket className="w-3 h-3" />
+                          <span>Publish Now</span>
+                        </button>
+                      </div>
 
                       <button
                         type="button"
@@ -627,7 +654,7 @@ export const WordPressAdmin: React.FC = () => {
                         }}
                         className="text-xs text-violet-400 hover:text-violet-300 transition-colors"
                       >
-                        Open Full Gutenberg Editor &rarr;
+                        Open Full Editor &rarr;
                       </button>
                     </div>
                   </form>
@@ -855,6 +882,25 @@ export const WordPressAdmin: React.FC = () => {
 
                         <td className="py-3 px-4 text-right">
                           <div className="flex items-center justify-end gap-1.5">
+                            {p.status === 'draft' ? (
+                              <button
+                                onClick={() => publishPost(p)}
+                                className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded transition-colors cursor-pointer flex items-center gap-1 shadow"
+                                title="Quick Publish to Live site"
+                              >
+                                <Rocket className="w-3 h-3" />
+                                <span>Publish</span>
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => saveDraft({ ...p, status: 'draft' })}
+                                className="px-2 py-1 text-[10px] font-medium bg-[#222638] hover:bg-[#2e334a] text-slate-400 hover:text-amber-300 rounded transition-colors cursor-pointer"
+                                title="Revert to Draft"
+                              >
+                                Unpublish
+                              </button>
+                            )}
+
                             <button
                               onClick={() => {
                                 setEditingPostId(p.id);

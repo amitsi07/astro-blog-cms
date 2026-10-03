@@ -450,10 +450,11 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     };
 
     setPosts((prev) => {
-      if (isNew) {
-        return [finalPost, ...prev];
+      const exists = prev.some((p) => p.id === finalPost.id);
+      if (exists) {
+        return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
       }
-      return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
+      return [finalPost, ...prev];
     });
 
     // Sync with backend API to write Markdown files to disk
@@ -462,10 +463,10 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalPost)
-      }).catch(console.error);
+      }).catch(console.warn);
     } catch {}
 
-    showToast(`📝 Draft "${finalPost.title}" saved locally.`);
+    showToast(`📝 Draft "${finalPost.title}" saved.`);
     return finalPost;
   };
 
@@ -508,22 +509,23 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     };
 
     setPosts((prev) => {
-      if (isNew) {
-        return [finalPost, ...prev];
+      const exists = prev.some((p) => p.id === finalPost.id);
+      if (exists) {
+        return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
       }
-      return prev.map((p) => (p.id === finalPost.id ? finalPost : p));
+      return [finalPost, ...prev];
     });
 
     // Sync with backend API to write Markdown files to disk
     try {
-      fetch('/api/posts', {
+      await fetch('/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalPost)
-      }).catch(console.error);
+      }).catch(console.warn);
     } catch {}
 
-    showToast(`✅ "${finalPost.title}" Published! Triggering Cloudflare auto-build...`);
+    showToast(`✅ "${finalPost.title}" Published successfully!`);
 
     // If GitHub connection is set, push to GitHub in background
     if (webhookConfig.githubToken && webhookConfig.githubRepo) {
@@ -548,7 +550,7 @@ export const PromptProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // Trigger auto-deploy if enabled
     if (webhookConfig.autoDeployOnPublish) {
-      await triggerDeployment(`Post Published: "${finalPost.title}"`);
+      triggerDeployment(`Post Published: "${finalPost.title}"`);
     }
 
     return finalPost;
